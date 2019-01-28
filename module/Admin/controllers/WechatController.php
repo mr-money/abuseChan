@@ -34,6 +34,12 @@ class WechatController extends CommonController
         $admin['avatar'] = empty($admin['avatar'])?\Yii::$app->request->getHostInfo().'/AmazeUi/img/user04.png':UPLOAD_DIR.'/avatar'.$admin['avatar'];
 
         $responseData['admin'] = $admin;
+
+        //TODO 获取服务器信息
+
+
+
+
         return $this->render('index',$responseData);
     }
 
