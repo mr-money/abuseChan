@@ -24,10 +24,16 @@ class WechatController extends CommonController
     }
 
     /*
-     * 管理后台首页
+     * 管理后台首页外部框架
      * */
     public function actionIndex()
     {
+        //系统类型
+        if(strtolower(substr(PHP_OS, 0, 3)) == 'win'){
+            'windows';
+        }else{
+            'linux';
+        }
         $admin = $this->sessionGlobal->get('admin');
 
         //默认头像
@@ -41,6 +47,15 @@ class WechatController extends CommonController
 
         return $this->render('index',$responseData);
     }
+
+    /*
+     * 管理后台home页
+     * */
+    public function actionHome()
+    {
+        return $this->render('home');
+    }
+
 
     /*
      * 退出登录ajax

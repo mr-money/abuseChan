@@ -1,0 +1,34 @@
+iframe {
+    padding: 0px;
+    width: 100%;
+}
+
+body{
+    overflow-y: auto;
+}
+
+.am-nav-tabs{
+    background-color: #f2f6f9;
+}
+
+.am-tabs-nav li {
+    position: relative;
+    z-index: 1;
+}
+
+.am-tabs-nav .am-icon-close {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    color: #888;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.am-tabs-nav .am-icon-close:hover {
+    color: #333;
+}
+
+.am-tabs-nav .am-icon-close ~ a {
+    padding-right: 25px !important;
+}

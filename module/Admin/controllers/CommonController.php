@@ -47,4 +47,14 @@ class CommonController extends \yii\web\Controller
         return parent::beforeAction($action);
     }
 
+    /*
+     * 重写dump方法
+     * */
+    public function dump($data)
+    {
+        echo "<pre>";
+        var_dump($data);
+        echo "<pre/>";
+    }
+
 }

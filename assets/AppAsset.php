@@ -28,6 +28,8 @@ class AppAsset extends AssetBundle
         'AmazeUI/css/app.css',
         'AmazeUI/css/fullcalendar.min.css',
         'AmazeUI/css/fullcalendar.print.css',
+
+        'css/admin.index.css', //admin页面css
     ];
     public $js = [
         'AmazeUI/js/amazeui.datatables.min.js',
@@ -40,6 +42,7 @@ class AppAsset extends AssetBundle
         'AmazeUI/js/theme.js',
 
         'js/md5.js', //js md5加密
+        'js/admin.index.js', //admin页面js
     ];
 
 

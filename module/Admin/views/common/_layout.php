@@ -11,7 +11,11 @@ $this->beginPage();
 $this->registerCsrfMetaTags();
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
 <?php $this->head() ?>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,6 +34,4 @@ $this->registerCsrfMetaTags();
         <link rel="stylesheet" href="assets/css/amazeui.datatables.min.css" />
         <link rel="stylesheet" href="assets/css/app.css">
         <script src="assets/js/jquery.min.js"></script>-->
-
 </head>
-
