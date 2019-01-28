@@ -37,8 +37,7 @@ class WechatController extends CommonController
 
         //TODO 获取服务器信息
 
-
-
+        
 
         return $this->render('index',$responseData);
     }
