@@ -36,7 +36,7 @@ class WechatController extends CommonController
         $admin = $this->sessionGlobal->get('admin');
 
         //默认头像
-        $admin['avatar'] = empty($admin['avatar']) ? \Yii::$app->request->getHostInfo() . '/AmazeUi/img/user04.png' : UPLOAD_DIR . '/avatar' . $admin['avatar'];
+        $admin['avatar'] = empty($admin['avatar']) ? \Yii::$app->homeUrl . 'AmazeUi/img/user04.png' : UPLOAD_DIR . '/avatar' . $admin['avatar'];
 
         $responseData['admin'] = $admin;
 
