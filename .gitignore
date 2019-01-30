@@ -31,3 +31,9 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+
+#config文件
+/config
+
+#前端模板文件
+/adminHTML

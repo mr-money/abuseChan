@@ -118,7 +118,7 @@
         <button type="button" class="am-btn am-btn-primary js-append-tab">插入 Tab</button>
     </div>
 
-    </div>
+</div>
 <!--<script src="assets/js/amazeui.min.js"></script>
 <script src="assets/js/amazeui.datatables.min.js"></script>
 <script src="assets/js/dataTables.responsive.min.js"></script>
@@ -128,7 +128,6 @@
 <?php $this->endBody() ?>
 
 </html>
-<?php $this->endPage() ?>
 
 <script>
     //退出登录
@@ -152,3 +151,6 @@
 
     }
 </script>
+
+<?php $this->endPage() ?>
+

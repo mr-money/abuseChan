@@ -4,10 +4,10 @@
 <div class="container-fluid am-cf">
     <div class="row">
         <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
-            <div class="page-header-heading"><span class="am-icon-home page-header-heading-icon"></span> 部件首页
-                <small>Amaze UI</small>
+            <div class="page-header-heading"><span class="am-icon-home page-header-heading-icon"></span> 首页
+                <small>Abuse Chan Home Page</small>
             </div>
-            <p class="page-header-description">Amaze UI 含近 20 个 CSS 组件、20 余 JS 组件，更有多个包含不同主题的 Web 组件。</p>
+            <p class="page-header-description">骂骂酱 一个能和你对骂的公众号</p>
         </div>
         <div class="am-u-lg-3 tpl-index-settings-button">
             <button type="button" class="page-header-button"><span class="am-icon-paint-brush"></span> 设置
@@ -85,22 +85,8 @@
     </div>
 
     <div class="row am-cf">
-        <div class="am-u-sm-12 am-u-md-8">
-            <div class="widget am-cf">
-                <div class="widget-head am-cf">
-                    <div class="widget-title am-fl">月度财务收支计划</div>
-                    <div class="widget-function am-fr">
-                        <a href="javascript:;" class="am-icon-cog"></a>
-                    </div>
-                </div>
-                <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="tpl-echarts">
-
-                </div>
-            </div>
-        </div>
-
-        <div class="am-u-sm-12 am-u-md-4">
-            <div class="widget am-cf">
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-4 widget-margin-bottom-lg">
+            <div class="widget am-cf widget-body-lg">
                 <div class="widget-head am-cf">
                     <div class="widget-title am-fl">专用服务器负载</div>
                     <div class="widget-function am-fr">
@@ -124,26 +110,6 @@
                     <div class="am-progress">
                         <div class="am-progress-bar am-progress-bar-danger" style="width: 35%"></div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row am-cf">
-        <div class="am-u-sm-12 am-u-md-12 am-u-lg-4 widget-margin-bottom-lg ">
-            <div class="tpl-user-card am-text-center widget-body-lg">
-                <div class="tpl-user-card-title">
-                    禁言小张
-                </div>
-                <div class="achievement-subheading">
-                    月度最佳员工
-                </div>
-                <img class="achievement-image" src="assets/img/user07.png" alt="">
-                <div class="achievement-description">
-                    禁言小张在
-                    <strong>30天内</strong> 禁言了
-                    <strong>200多</strong>人。
                 </div>
             </div>
         </div>
