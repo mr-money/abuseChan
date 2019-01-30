@@ -27,21 +27,13 @@ class WechatController extends CommonController
      * */
     public function actionIndex()
     {
-        //系统类型
-        if (strtolower(substr(PHP_OS, 0, 3)) == 'win') {
-            'windows';
-        } else {
-            'linux';
-        }
+
         $admin = $this->sessionGlobal->get('admin');
 
         //默认头像
         $admin['avatar'] = empty($admin['avatar']) ? \Yii::$app->homeUrl . 'AmazeUi/img/user04.png' : UPLOAD_DIR . '/avatar' . $admin['avatar'];
 
         $responseData['admin'] = $admin;
-
-        //TODO 获取服务器信息
-
 
         return $this->render('index', $responseData);
     }
@@ -69,7 +61,127 @@ class WechatController extends CommonController
     * */
     public function actionHome()
     {
-        return $this->render('home');
+        //TODO 获取服务器信息
+        $responseData = array();
+        $server = array(); //系统状态信息
+        //系统类型
+        if (strtolower(substr(PHP_OS, 0, 3)) == 'win') {
+            //已运行时长
+            $out = '';
+            $timeInfo = exec('wmic os get lastBootUpTime,LocalDateTime', $out, $status);
+            $datetime_array = explode('.', $out[1]);
+            $dt_array = explode(' ', $datetime_array[1]);
+            $localtime = substr($datetime_array[1], -14);
+            $boottime = $datetime_array[0];
+            $uptime = strtotime($localtime) - strtotime($datetime_array[0]);
+
+            $formatTime = $this->time2second($uptime);
+
+//            $this->dump("已运行: " . $formatTime);
+            $server['time'] = array(
+                'uptime' => $uptime,
+                'formatTime' => $formatTime,
+            );
+
+
+            //硬盘用量
+            $out = '';
+            $diskInfo = exec('wmic logicaldisk get FreeSpace,size /format:list', $out, $status);
+            $hd = '';
+            foreach ($out as $vaule) {
+                $hd .= $vaule . ' ';;
+            }
+            $hd_array = explode('   ', trim($hd));
+            $key = 'CDEFGHIJKLMNOPQRSTUVWXYZ';
+            $diskUsed = 0; //已用空间
+            $diskSum = 0; //总空间
+            $diskFree = 0; //可用空间
+            foreach ($hd_array as $k => $v) {
+                $s_array = explode('Size=', $v);
+                $fs_array = explode('FreeSpace=', $s_array[0]);
+                $size = round(trim($s_array[1]) / (1024 * 1024 * 1024), 1);
+                $freespace = round(trim($fs_array[1]) / (1024 * 1024 * 1024), 1);
+                $drive = $key[$k];
+
+//                echo $drive . "盘,\r\n已用空间: " . ($size - $freespace) . "GB/" . $size . "GB\r\n可用空间: " . $freespace . "GB\r\n\r\n";
+
+                $diskUsed += ($size - $freespace);
+                $diskSum += $size;
+                $diskFree += $freespace;
+
+            }
+//            $this->dump("硬盘占用比例：" . round($diskUsed * 100 / $diskSum, 2) . '%');
+            $server['disk'] = array(
+                'diskUsed' => $diskUsed,
+                'diskSum' => $diskSum,
+                'diskFree'=>$diskFree,
+                'percent' => round($diskUsed * 100 / $diskSum, 2),
+            );
+
+        } else {
+            echo 'linux';
+        }
+
+        $responseData['server'] = $server;
+
+        return $this->render('home',$responseData);
+    }
+
+    /*
+     * 获取实时服务器性能
+     * */
+    public function actionGetCpuAjax()
+    {
+        //获取cpu使用率
+        $path = \Yii::$app->basePath . "\\cpu_usage.vbs";
+        $content = <<<ETO
+On Error Resume Next
+Set objProc = GetObject("winmgmts:\\\\.\\root\cimv2:win32_processor='cpu0'")
+WScript.Echo(objProc.LoadPercentage)
+ETO;
+        if (!file_exists($path)) {
+            file_put_contents($path, $content);
+        }
+
+        exec("cscript -nologo $path", $usage);
+
+        $response = array(
+            'status' => $this->apiStatus['SUCCESS'],
+            'message' => '',
+        );
+        try{
+            $CPU = $usage[0];
+        }catch(Exception $e){
+            // 处理异常
+            $response['status'] = $this->apiStatus['ERROR'];
+            return json_encode($response);
+            die;
+        }
+
+        $response['data']['CPU'] = $CPU;
+
+
+        //物理内存
+        $out = '';
+        $memoryInfo = exec('wmic os get TotalVisibleMemorySize,FreePhysicalMemory', $out, $status);
+        //多个空格转为一个空格
+        $phymem = preg_replace("/\s(?=\s)/", "\\1", $out[1]);
+        $phymem_array = explode(' ', $phymem);
+        //print_r($phymem_array);
+        $freephymem = ceil($phymem_array[0] / 1024);
+        $totalphymem = ceil($phymem_array[1] / 1024);
+//            echo "已用物理内存: ". ($totalphymem - $freephymem) ."MB/". $totalphymem . "MB\r\n空闲物理内存: " . $freephymem . "MB\r\n\r\n";
+
+//            $this->dump("内存占用：" . round(($totalphymem - $freephymem) * 100 / $totalphymem, 2) . '%');
+
+        $response['data']['memory'] = array(
+            'usedphymem' => $totalphymem - $freephymem,
+            'totalphymem' => $totalphymem,
+            'percent' => round(($totalphymem - $freephymem) * 100 / $totalphymem, 2),
+        );
+
+
+        return json_encode($response);
     }
 
 }

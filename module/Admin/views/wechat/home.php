@@ -95,17 +95,25 @@
                 </div>
                 <div class="widget-body widget-body-md am-fr">
 
-                    <div class="am-progress-title">CPU Load <span class="am-fr am-progress-title-more">28% / 100%</span>
+                    <div class="am-progress-title">
+                        硬盘使用情况 <?= $server['disk']['percent'] ?>%
+                        <span class="am-fr am-progress-title-more">已用空间:<?= $server['disk']['diskUsed'] ?>G/<?= $server['disk']['diskSum'] ?>G 可用空间:<?= $server['disk']['diskFree'] ?>G</span>
+                    </div>
+                    <div class="am-progress">
+                        <div class="am-progress-bar  am-progress-bar-warning" style="width: <?= $server['disk']['percent'] ?>%"></div>
+                    </div>
+
+                    <div class="am-progress-title">
+                        内存占用情况
+                        <span class="am-fr am-progress-title-more">28% / 100%</span>
                     </div>
                     <div class="am-progress">
                         <div class="am-progress-bar" style="width: 15%"></div>
                     </div>
-                    <div class="am-progress-title">CPU Load <span class="am-fr am-progress-title-more">28% / 100%</span>
-                    </div>
-                    <div class="am-progress">
-                        <div class="am-progress-bar  am-progress-bar-warning" style="width: 75%"></div>
-                    </div>
-                    <div class="am-progress-title">CPU Load <span class="am-fr am-progress-title-more">28% / 100%</span>
+
+                    <div class="am-progress-title">
+                        CPU Load
+                        <span class="am-fr am-progress-title-more">28% / 100%</span>
                     </div>
                     <div class="am-progress">
                         <div class="am-progress-bar am-progress-bar-danger" style="width: 35%"></div>
@@ -219,6 +227,10 @@
     </div>
 </div>
 <?php $this->endBody() ?>
+
+<script>
+    /*TODO ajax获取服务器性能*/
+</script>
 
 <?php $this->endPage() ?>
 
