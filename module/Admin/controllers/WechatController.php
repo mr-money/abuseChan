@@ -27,12 +27,14 @@ class WechatController extends CommonController
      * */
     public function actionIndex()
     {
-
         $admin = $this->sessionGlobal->get('admin');
+
+        //配置左侧导航栏
+        \Yii::$app->view->params['adminMenu'] = CommonController::$adminMenu;;
+
 
         //默认头像
         $admin['avatar'] = empty($admin['avatar']) ? \Yii::$app->homeUrl . 'AmazeUi/img/user04.png' : UPLOAD_DIR . '/avatar' . $admin['avatar'];
-
         $responseData['admin'] = $admin;
 
         return $this->render('index', $responseData);

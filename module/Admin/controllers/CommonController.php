@@ -10,8 +10,9 @@ class CommonController extends \yii\web\Controller
     public $layout = false; //不使用默认布局
 
     public $sessionGlobal; //全局session
-
     public $apiStatus; //ajax返回状态
+
+    static $adminMenu; //左侧导航栏
 
     public function init()
     {
@@ -21,6 +22,8 @@ class CommonController extends \yii\web\Controller
 
         $this->apiStatus = \Yii::$app->params['apiStatus']; // 配置config/params
 
+        //左侧导航栏
+        self::$adminMenu = \Yii::$app->params['adminMenu'];
     }
 
     public function beforeAction($action)
