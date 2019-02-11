@@ -235,6 +235,8 @@
 <script>
     $(function () {
         /*ajax获取服务器性能*/
+        //TODO 点击刷新按钮刷新性能信息
+        return;
         var intervalID = setInterval(function () {
             $.post(
                 "<?= \yii\helpers\Url::to(array('get-cpu-ajax')) ?>",

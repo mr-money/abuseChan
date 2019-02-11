@@ -91,7 +91,6 @@ class WechatController extends CommonController
      *      disk 硬盘
      *      CPU
      *      memory 内存
-     *
      * )
      */
     public function getServerInfo()
@@ -170,6 +169,7 @@ ETO;
                 $CPU = $usage[0];
             }catch(Exception $e){
                 // 处理异常
+                $server['CPU'] = 0;
             }
 
             $server['CPU'] = $CPU;

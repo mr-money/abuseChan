@@ -21,9 +21,9 @@
 
             <?php foreach ($menu['navLink'] as $navLink){ ?>
                 <li class="sidebar-nav-link">
-                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                    <a href="javascript:navRedirect(this,'<?= $navLink['url']; ?>');" class="sidebar-nav-sub-title">
                         <i class="<?= $navLink['logo'] ?>"></i>
-                        <?= $navLink['name'] ?>
+                        <span class="linkname"><?= $navLink['name'] ?></span>
     <!--                    <span class="am-badge am-badge-secondary sidebar-nav-link-logo-ico am-round am-fr am-margin-right-sm">数字气泡4</span>-->
                     <?php if(!empty($navLink['navChild'])){ ?>
                         <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span><!--下拉控件-->
@@ -35,9 +35,9 @@
                         <ul class="sidebar-nav sidebar-nav-sub">
                         <?php foreach ($navLink['navChild'] as $navChild){ ?>
                             <li class="sidebar-nav-link">
-                                <a href="javascript:;">
+                                <a href="javascript:navRedirect(this,'<?= $navChild['url']; ?>');">
                                     <span class="<?= $navChild['logo'] ?>"></span>
-                                    <?= $navChild['name'] ?>
+                                    <span class="linkname"><?= $navChild['name'] ?></span>
                                 </a>
                             </li>
                         <?php } ?>
@@ -124,8 +124,10 @@
 </div>
 
 <script>
-    //TODO 点击外部链接 新建跳转iframe
-    function iframeRedirect(url) {
-
+    function navRedirect(obj,url) {
+        if(url !== ''){
+            var title = $(obj).children(".linkname").html()
+            console.log(title);
+        }
     }
 </script>

@@ -15,7 +15,7 @@
 
     <!-- 内容区域 框架形式显示-->
     <div class="tpl-content-wrapper">
-        <div class="am-tabs" data-am-tabs="{noSwipe: 1}" id="doc-tab-demo-1">
+        <div class="am-tabs" data-am-tabs="{noSwipe: 1}" id="admin-doc-tab">
             <ul class="am-tabs-nav am-nav am-nav-tabs">
                 <li class="am-active"><a href="javascript: void(0)">首页</a></li>
             </ul>

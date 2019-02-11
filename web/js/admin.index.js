@@ -1,6 +1,6 @@
 $(function() {
     var tabCounter = 0;
-    var $tab = $('#doc-tab-demo-1');
+    var $tab = $('#admin-doc-tab');
     var $nav = $tab.find('.am-tabs-nav');
     var $bd = $tab.find('.am-tabs-bd');
 
@@ -54,5 +54,23 @@ $(function() {
                 // this.style.display = 'block';
             };
         })(i);
+    }
+
+    //点击外部链接 新建跳转iframe
+    function iframeRedirect(title,url) {
+        var nav = '<li>' +
+                    '<span class="am-icon-close"></span>' +
+                    '<a href="javascript: void(0)">' + title + '</a>' +
+                '</li>';
+        var content = '<div class="am-tab-panel am-active">' +
+                        "<iframe src='"+ url +"' frameborder='0'></iframe>" +
+                    '</div>';
+
+        $(".am-tab-panel").removeClass('am-active');
+
+        $nav.append(nav);
+        $bd.append(content);
+        tabCounter++;
+        $tab.tabs('refresh');
     }
 });
