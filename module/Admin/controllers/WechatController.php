@@ -47,7 +47,7 @@ class WechatController extends CommonController
     {
         $this->sessionGlobal->set('admin', null);
 
-        $cookie = \Yii::$app->request->cookies;
+        $cookie = \Yii::$app->response->cookies;
         $cookie->remove('remember_token');
 
         $response = array(
