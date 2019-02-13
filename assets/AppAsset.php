@@ -37,9 +37,10 @@ class AppAsset extends AssetBundle
         'AmazeUI/js/app.js',
         'AmazeUI/js/dataTables.responsive.min.js',
         'AmazeUI/js/echarts.min.js',
-        'AmazeUI/js/fullcalendar.min.js',
         'AmazeUI/js/moment.js',
         'AmazeUI/js/theme.js',
+        'AmazeUI/js/fullcalendar.min.js',
+
 
         'js/md5.js', //js md5加密
         'js/admin.index.js', //admin页面js
@@ -57,7 +58,7 @@ class AppAsset extends AssetBundle
             $jsfile,
             [
                 AppAsset::className(),
-                "depends" => "app\assets\AppAsset"
+                "depends" => "app/assets/AppAsset"
             ]
         );
     }
@@ -67,7 +68,7 @@ class AppAsset extends AssetBundle
             $cssfile,
             [
                 AppAsset::className(),
-                "depends" => "app\assets\AppAsset"
+                "depends" => "app/assets/AppAsset"
             ]
         );
     }
