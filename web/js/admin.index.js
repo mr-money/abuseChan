@@ -1,6 +1,6 @@
 $(function() {
     var tabCounter = 0;
-    var $tab = $('#doc-tab-demo-1');
+    var $tab = $('#admin-doc-tab');
     var $nav = $tab.find('.am-tabs-nav');
     var $bd = $tab.find('.am-tabs-bd');
 
@@ -31,28 +31,4 @@ $(function() {
         $tab.tabs('open', index > 0 ? index - 1 : index + 1);
         $tab.tabs('refresh');
     });
-
-
-
-    //frame自适应高度
-    var iframes = document.getElementsByTagName('iframe');
-
-    for (var i = 0, j = iframes.length; i < j; ++i) {
-        // 放在闭包中，防止iframe触发load事件的时候下标不匹配
-        (function(_i) {
-            iframes[_i].onload = function() {
-                this.contentWindow.onbeforeunload = function() {
-                    iframes[_i].style.visibility = 'hidden';
-                    // iframes[_i].style.display = 'none';
-
-                    iframes[_i].setAttribute('height', 'auto');
-                };
-
-                this.setAttribute('height', this.contentWindow.document.body.scrollHeight);
-
-                this.style.visibility = 'visible';
-                // this.style.display = 'block';
-            };
-        })(i);
-    }
 });
