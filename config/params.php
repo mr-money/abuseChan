@@ -16,7 +16,7 @@ return [
             'navLink' => array(
                 array(
                     'name'=>'首页',
-                    'url' => "wechat/index",
+                    'url' => "home",
                     'logo' => "am-icon-home sidebar-nav-link-logo",
                     'navChild' => array(),
                 ),

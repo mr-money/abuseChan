@@ -41,7 +41,7 @@ class AppAsset extends AssetBundle
         'AmazeUI/js/moment.js',
         'AmazeUI/js/theme.js',
 
-        'js/md5.js', //js md5加密
+//        'js/md5.js', //js md5加密
         'js/admin.index.js', //admin页面js
     ];
 

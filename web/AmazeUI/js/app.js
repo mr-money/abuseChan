@@ -26,6 +26,29 @@ $(function () {
     //     }else{
     //       storageSave(saveSelectColor);
     //     }
+
+
+    //frame自适应高度
+    var iframes = document.getElementsByTagName('iframe');
+
+    for (var i = 0, j = iframes.length; i < j; ++i) {
+        // 放在闭包中，防止iframe触发load事件的时候下标不匹配
+        (function(_i) {
+            iframes[_i].onload = function() {
+                this.contentWindow.onbeforeunload = function() {
+                    iframes[_i].style.visibility = 'hidden';
+                    // iframes[_i].style.display = 'none';
+
+                    iframes[_i].setAttribute('height', 'auto');
+                };
+
+                this.setAttribute('height', this.contentWindow.document.body.scrollHeight);
+
+                this.style.visibility = 'visible';
+                // this.style.display = 'block';
+            };
+        })(i);
+    }
 })
 
 
@@ -381,6 +404,7 @@ $('.sidebar-nav-sub-title').on('click', function () {
         .find('.sidebar-nav-sub-ico').toggleClass('sidebar-nav-sub-ico-rotate');
 })
 
+
 /*
  * 使用modal模拟alert
  * */
@@ -453,6 +477,48 @@ function myConfirm(message, option, title) {
         var modalId = $('.amazeui-am-modal-confirm').attr('id');
 
         $("#" + modalId).modal();
+    }
+}
+
+//点击外部链接 新建跳转iframe
+function iframeRedirect(title,url) {
+    var $tab = $('#admin-doc-tab');
+    var $nav = $tab.find('.am-tabs-nav');
+    var $bd = $tab.find('.am-tabs-bd');
+    console.log(title);
+    var nav = '<li>' +
+        '<span class="am-icon-close"></span>' +
+        '<a href="javascript: void(0)">' + title + '</a>' +
+        '</li>';
+    var content = '<div class="am-tab-panel am-active">' +
+        "<iframe src='"+ url +"' frameborder='0'></iframe>" +
+        '</div>';
+
+    // $(".am-tab-panel").removeClass('am-active');
+
+    $nav.append(nav);
+    $bd.append(content);
+    $tab.tabs('refresh');
+
+    var iframes = document.getElementsByTagName('iframe');
+
+    for (var i = 0, j = iframes.length; i < j; ++i) {
+        // 放在闭包中，防止iframe触发load事件的时候下标不匹配
+        (function(_i) {
+            iframes[_i].onload = function() {
+                this.contentWindow.onbeforeunload = function() {
+                    iframes[_i].style.visibility = 'hidden';
+                    // iframes[_i].style.display = 'none';
+
+                    iframes[_i].setAttribute('height', 'auto');
+                };
+
+                this.setAttribute('height', this.contentWindow.document.body.scrollHeight);
+
+                this.style.visibility = 'visible';
+                // this.style.display = 'block';
+            };
+        })(i);
     }
 }
 
