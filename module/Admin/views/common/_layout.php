@@ -6,9 +6,8 @@ AppAsset::register($this);
 //AppAsset::addJs($this,Yii::$app->request->baseUrl."/js/a.js");
 //AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/b.css");
 
-$this->beginPage();
-
 $this->registerCsrfMetaTags();
+$this->beginPage();
 ?>
 
 <!DOCTYPE html>
