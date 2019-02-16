@@ -35,5 +35,8 @@ tests/_support/_generated
 #config文件
 /config
 
+#数据库配置文件
+/config/db.php
+
 #前端模板文件
 /adminHTML
