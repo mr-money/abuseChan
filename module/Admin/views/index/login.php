@@ -103,6 +103,10 @@ $this->registerCsrfMetaTags();
         //判空
 //        myAlert('用户名不能为空哦');
 
+        //跳转进度
+        var progress = $.AMUI.progress;
+        progress.start();
+
         var account = $("#account").val();
         var password = hex_md5($("#password").val());
         var rememberMe = $("#remember-me").is(':checked');
@@ -116,6 +120,7 @@ $this->registerCsrfMetaTags();
             },
             function (data) {
 //                console.log(data);return;
+                progress.done();//跳转进度结束
                 if(data.status == 1000){
                     myAlert('登录成功');
                     var url = "<?= \yii\helpers\Url::to(['wechat/index']); ?>";
@@ -125,7 +130,6 @@ $this->registerCsrfMetaTags();
                 }else{
                     myAlert(data.message);
                     return;
-
                 }
             },
             "json"

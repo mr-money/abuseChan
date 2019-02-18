@@ -14,6 +14,11 @@ use yii\web\AssetBundle;
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
+ *
+ * function addJs and addCss
+ * @author 钱京 <740363495@qq.com>
+ * @since 3.0
+
  */
 class AppAsset extends AssetBundle
 {
