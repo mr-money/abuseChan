@@ -58,7 +58,7 @@ class AppAsset extends AssetBundle
             $jsfile,
             [
                 AppAsset::className(),
-                "depends" => "app/assets/AppAsset"
+                "depends" => "app\assets\AppAsset"
             ]
         );
     }
@@ -68,7 +68,7 @@ class AppAsset extends AssetBundle
             $cssfile,
             [
                 AppAsset::className(),
-                "depends" => "app/assets/AppAsset"
+                "depends" => "app\assets\AppAsset"
             ]
         );
     }
