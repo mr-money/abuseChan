@@ -90,7 +90,7 @@
                 <div class="widget-head am-cf">
                     <div class="widget-title am-fl" id="serverTime">服务器已运行</div>
                     <div class="widget-function am-fr">
-                        <a href="javascript:;" class="am-icon-cog"></a>
+                        <a href="javascript:void(0);" onclick="getServerInfo(this)" class="am-icon-refresh"></a>
                     </div>
                 </div>
                 <div class="widget-body widget-body-md am-fr">
@@ -234,38 +234,35 @@
 
 <script>
     $(function () {
-        /*ajax获取服务器性能*/
-        //TODO 点击刷新按钮刷新性能信息
-        return;
-        var intervalID = setInterval(function () {
-            $.post(
-                "<?= \yii\helpers\Url::to(array('get-cpu-ajax')) ?>",
-                {},
-                function (data) {
-//                    console.log(data);
-                    if (data.status == 1000) {
-                        $("#memory").text('内存 ' + data.data.memory.percent + '%');
-                        $("#memoryPer").text(data.data.memory.usedphymem + 'M / ' + data.data.memory.totalphymem + 'M');
-                        $("#memoryStyle").css('width', data.data.memory.percent + '%');
-
-                        $("#CPUPer").text(data.data.CPU + '%');
-                        $("#CPUStyle").css('width', data.data.CPU + '%');
-
-                        $("#serverTime").text('服务器已运行'+data.data.time.formatTime)
-                    } else {
-                        myAlert('暂时获取不到服务器信息了呢');
-
-                        //清除定时器
-                        clearInterval(intervalID);
-                        return;
-                    }
-
-                },
-                "json"
-            );
-        }, 3000)
+        
     })
+    function getServerInfo(obj){
+        $(obj).addClass('am-icon-spin');
+        $.post(
+            "<?= \yii\helpers\Url::to(array('get-cpu-ajax')) ?>",
+            {},
+            function (data) {
+//                    console.log(data);
+                if (data.status == 1000) {
+                    $("#memory").text('内存 ' + data.data.memory.percent + '%');
+                    $("#memoryPer").text(data.data.memory.usedphymem + 'M / ' + data.data.memory.totalphymem + 'M');
+                    $("#memoryStyle").css('width', data.data.memory.percent + '%');
 
+                    $("#CPUPer").text(data.data.CPU + '%');
+                    $("#CPUStyle").css('width', data.data.CPU + '%');
+
+                    $("#serverTime").text('服务器已运行'+data.data.time.formatTime);
+
+                    $(obj).removeClass('am-icon-spin');
+                } else {
+                    myAlert('暂时获取不到服务器信息了呢');
+                    return;
+                }
+
+            },
+            "json"
+        );
+    }
 </script>
 
 <?php $this->endPage() ?>
