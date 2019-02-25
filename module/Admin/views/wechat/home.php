@@ -90,7 +90,7 @@
                 <div class="widget-head am-cf">
                     <div class="widget-title am-fl" id="serverTime">服务器已运行</div>
                     <div class="widget-function am-fr">
-                        <a href="javascript:void(0);" onclick="getServerInfo(this)" class="am-icon-refresh"></a>
+                        <a href="javascript:void(0);" onclick="getServerInfo(this)" class="am-icon-refresh am-icon-spin"></a>
                     </div>
                 </div>
                 <div class="widget-body widget-body-md am-fr">
@@ -104,12 +104,12 @@
                     </div>
 
                     <div class="am-progress-title">
-                        硬盘 0%
-                        <span class="am-fr am-progress-title-more">已用:0
+                        <span id="disk">硬盘 0%</span>
+                        <span class="am-fr am-progress-title-more" id="diskPer">已用:0
                             G/0G 可用:0G</span>
                     </div>
                     <div class="am-progress">
-                        <div class="am-progress-bar  am-progress-bar-warning"
+                        <div class="am-progress-bar  am-progress-bar-warning" id="diskStyle"
                              style="width: 1%"></div>
                     </div>
 
@@ -234,24 +234,57 @@
 
 <script>
     $(function () {
-        
-    })
-    function getServerInfo(obj){
-        $(obj).addClass('am-icon-spin');
+        //进入页面第一次获取服务器信息
         $.post(
             "<?= \yii\helpers\Url::to(array('get-cpu-ajax')) ?>",
             {},
             function (data) {
-//                    console.log(data);
+//                console.log(data);
                 if (data.status == 1000) {
                     $("#memory").text('内存 ' + data.data.memory.percent + '%');
                     $("#memoryPer").text(data.data.memory.usedphymem + 'M / ' + data.data.memory.totalphymem + 'M');
                     $("#memoryStyle").css('width', data.data.memory.percent + '%');
 
+                    $("#disk").text('内存 ' + data.data.disk.percent + '%');
+                    $("#diskPer").text('已用:' + data.data.disk.diskUsed + 'G/' + data.data.disk.diskSum + 'G 可用:' + data.data.disk.diskFree + 'G');
+                    $("#diskStyle").css('width', data.data.disk.percent + '%');
+
                     $("#CPUPer").text(data.data.CPU + '%');
                     $("#CPUStyle").css('width', data.data.CPU + '%');
 
-                    $("#serverTime").text('服务器已运行'+data.data.time.formatTime);
+                    $("#serverTime").text('服务器已运行' + data.data.time.formatTime);
+
+                    $("#serverTime").next().children("a").removeClass('am-icon-spin');
+
+                } else {
+//                    myAlert('暂时获取不到服务器信息了呢');
+                    return;
+                }
+
+            },
+            "json"
+        );
+    })
+    function getServerInfo(obj) {
+        $(obj).addClass('am-icon-spin');
+        $.post(
+            "<?= \yii\helpers\Url::to(array('get-cpu-ajax')) ?>",
+            {},
+            function (data) {
+//                console.log(data);
+                if (data.status == 1000) {
+                    $("#memory").text('内存 ' + data.data.memory.percent + '%');
+                    $("#memoryPer").text(data.data.memory.usedphymem + 'M / ' + data.data.memory.totalphymem + 'M');
+                    $("#memoryStyle").css('width', data.data.memory.percent + '%');
+
+                    $("#disk").text('内存 ' + data.data.disk.percent + '%');
+                    $("#diskPer").text('已用:' + data.data.disk.diskUsed + 'G/' + data.data.disk.diskSum + 'G 可用:' + data.data.disk.diskFree + 'G');
+                    $("#diskStyle").css('width', data.data.disk.percent + '%');
+
+                    $("#CPUPer").text(data.data.CPU + '%');
+                    $("#CPUStyle").css('width', data.data.CPU + '%');
+
+                    $("#serverTime").text('服务器已运行' + data.data.time.formatTime);
 
                     $(obj).removeClass('am-icon-spin');
                 } else {
