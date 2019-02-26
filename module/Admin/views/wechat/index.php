@@ -17,7 +17,7 @@
     <div class="tpl-content-wrapper">
         <div class="am-tabs" data-am-tabs="{noSwipe: 1}" id="admin-doc-tab">
             <ul class="am-tabs-nav am-nav am-nav-tabs">
-                <li class="am-active"><a href="javascript: void(0)">首页</a></li>
+                <li class="am-active"><span class="am-icon-close"></span><a href="javascript: void(0)">首页</a></li>
             </ul>
 
             <div class="am-tabs-bd">

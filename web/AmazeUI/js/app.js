@@ -33,9 +33,9 @@ $(function () {
 
     for (var i = 0, j = iframes.length; i < j; ++i) {
         // 放在闭包中，防止iframe触发load事件的时候下标不匹配
-        (function(_i) {
-            iframes[_i].onload = function() {
-                this.contentWindow.onbeforeunload = function() {
+        (function (_i) {
+            iframes[_i].onload = function () {
+                this.contentWindow.onbeforeunload = function () {
                     iframes[_i].style.visibility = 'hidden';
                     // iframes[_i].style.display = 'none';
 
@@ -481,9 +481,7 @@ function myConfirm(message, option, title) {
 }
 
 //点击外部链接 新建跳转iframe
-function iframeRedirect(title,url) {
-    $(".am-tab-panel").removeClass('am-active');
-
+function iframeRedirect(title, url) {
     var $tab = $('#admin-doc-tab');
     var $nav = $tab.find('.am-tabs-nav');
     var $bd = $tab.find('.am-tabs-bd');
@@ -492,21 +490,25 @@ function iframeRedirect(title,url) {
         '<span class="am-icon-close"></span>' +
         '<a href="javascript: void(0)">' + title + '</a>' +
         '</li>';
-    var content = '<div class="am-tab-panel am-active">' +
-        "<iframe src='"+ url +"' frameborder='0'></iframe>" +
+    var content = '<div class="am-tab-panel">' +
+        "<iframe src='" + url + "' frameborder='0'></iframe>" +
         '</div>';
 
     $nav.append(nav);
     $bd.append(content);
+
+    var index = $nav.children('li').length;
+
+    $tab.tabs('open', index-1);
     $tab.tabs('refresh');
 
     var iframes = document.getElementsByTagName('iframe');
 
     for (var i = 0, j = iframes.length; i < j; ++i) {
         // 放在闭包中，防止iframe触发load事件的时候下标不匹配
-        (function(_i) {
-            iframes[_i].onload = function() {
-                this.contentWindow.onbeforeunload = function() {
+        (function (_i) {
+            iframes[_i].onload = function () {
+                this.contentWindow.onbeforeunload = function () {
                     iframes[_i].style.visibility = 'hidden';
                     // iframes[_i].style.display = 'none';
 

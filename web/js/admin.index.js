@@ -12,6 +12,7 @@ $(function() {
         $nav.append(nav);
         $bd.append(content);
         tabCounter++;
+
         $tab.tabs('refresh');
     }
 
