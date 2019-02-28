@@ -496,12 +496,11 @@ function iframeRedirect(title, url) {
 
     $nav.append(nav);
     $bd.append(content);
-
+    $tab.tabs('refresh');
     var index = $nav.children('li').length;
 
     $tab.tabs('open', index-1);
     $tab.tabs('refresh');
-
     var iframes = document.getElementsByTagName('iframe');
 
     for (var i = 0, j = iframes.length; i < j; ++i) {

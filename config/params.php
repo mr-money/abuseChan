@@ -41,7 +41,7 @@ return [
             'navLink' => array(
                 array(
                     'name'=>'数据列表',
-                    'url' => "",
+                    'url' => null,  //存在子页面 不生成url 设置为null或false
                     'logo' => "am-icon-table sidebar-nav-link-logo",
                     'navChild' => array(
                         array(
