@@ -15,19 +15,19 @@ return [
             'navInfo' => '附加组件',
             'navLink' => array(
                 array(
-                    'name'=>'首页',
+                    'name' => '首页',
                     'url' => "home",
                     'logo' => "am-icon-home sidebar-nav-link-logo",
                     'navChild' => array(),
                 ),
                 array(
-                    'name'=>'表格',
+                    'name' => '表格',
                     'url' => "",
                     'logo' => "am-icon-table sidebar-nav-link-logo",
                     'navChild' => array(),
                 ),
                 array(
-                    'name'=>'表单',
+                    'name' => '表单',
                     'url' => "",
                     'logo' => "am-icon-wpforms sidebar-nav-link-logo",
                     'navChild' => array(),
@@ -40,17 +40,17 @@ return [
             'navInfo' => '常用页面',
             'navLink' => array(
                 array(
-                    'name'=>'数据列表',
+                    'name' => '数据列表',
                     'url' => null,  //存在子页面 不生成url 设置为null或false
                     'logo' => "am-icon-table sidebar-nav-link-logo",
                     'navChild' => array(
                         array(
-                            'name'=>'文字列表',
+                            'name' => '文字列表',
                             'url' => "",
                             'logo' => "am-icon-table sidebar-nav-link-logo",
                         ),
                         array(
-                            'name'=>'图文列表',
+                            'name' => '图文列表',
                             'url' => "",
                             'logo' => "am-icon-angle-right sidebar-nav-link-logo",
                         ),
@@ -71,4 +71,23 @@ return [
             ),
         ),
     ),
+
+
+    // 微信配置 具体可参考EasyWechat
+    'wechatConfig' => [],
+
+    // 微信支付配置 具体可参考EasyWechat
+    'wechatPaymentConfig' => [],
+
+    // 微信小程序配置 具体可参考EasyWechat
+    'wechatMiniProgramConfig' => [],
+
+    // 微信开放平台第三方平台配置 具体可参考EasyWechat
+    'wechatOpenPlatformConfig' => [],
+
+    // 微信企业微信配置 具体可参考EasyWechat
+    'wechatWorkConfig' => [],
+
+    // 微信企业微信开放平台 具体可参考EasyWechat
+    'wechatOpenWorkConfig' => [],
 ];
