@@ -70,7 +70,11 @@ $config = [
             )
         ],
 
-        //yii2-easy-wechat
+
+        /**
+         * yii2-easy-wechat
+         * https://github.com/jianyan74/yii2-easy-wechat
+         */
         'wechat' => [
             'class' => 'jianyan\easywechat\Wechat',
             'userOptions' => [],  // 用户身份类参数
