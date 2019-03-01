@@ -405,12 +405,16 @@ $('.sidebar-nav-sub-title').on('click', function () {
 })
 
 
-/*
+
+/**
  * 使用modal模拟alert
- * */
-function myAlert(message, title) {
+ * @param message = string
+ * @param title = false
+ * @param func = function
+ */
+function myAlert(message, title,func) {
     //title默认值
-    title = typeof title !== 'undefined' ? title : '骂骂酱提示你';
+    title = title ? title : '骂骂酱提示你';
 
     //该message模态框是否存在
     var haveMessage = $('.amazeui-am-modal-alert').children('.am-modal-dialog').children('.message').text();
@@ -433,6 +437,9 @@ function myAlert(message, title) {
     } else {
         var modalId = $('.amazeui-am-modal-alert').attr('id');
     }
+
+    $("#" + modalId).find(".am-modal-btn").click(func)
+
     $("#" + modalId).modal('open');
 
 }

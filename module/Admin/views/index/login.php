@@ -122,11 +122,20 @@ $this->registerCsrfMetaTags();
 //                console.log(data);return;
                 progress.done();//跳转进度结束
                 if(data.status == 1000){
-                    myAlert('登录成功');
                     var url = "<?= \yii\helpers\Url::to(['wechat/index']); ?>";
 
-                    location.href = url;
-                    return;
+                    //点击确定立即跳转
+                    myAlert('登录成功',false,function () {
+                        location.href = url;
+                        return;
+                    });
+
+                    //未点击等待5秒自动跳转
+                    setTimeout(function () {
+                        location.href = url;
+                        return;
+                    },5000)
+
                 }else{
                     myAlert(data.message);
                     return;

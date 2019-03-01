@@ -28,7 +28,7 @@
             </div>
         </div>
         <br />
-        <button type="button" class="am-btn am-btn-primary js-append-tab">插入 Tab</button>
+<!--        <button type="button" class="am-btn am-btn-primary js-append-tab">插入 Tab</button>-->
     </div>
 
 </div>
