@@ -1,7 +1,7 @@
 <header>
     <!-- logo -->
     <div class="am-fl tpl-header-logo">
-        <a href="javascript:;"><img src="<?= Yii::getAlias('@web'); ?>/AmazeUi/img/logo.png" alt=""></a>
+        <a href="javascript:;"><img src="<?= Yii::getAlias('@web'); ?>/AmazeUI/img/logo.png" alt=""></a>
     </div>
     <!-- 右侧内容 -->
     <div class="tpl-header-fluid">
