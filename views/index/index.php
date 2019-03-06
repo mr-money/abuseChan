@@ -770,9 +770,9 @@
     });
 </script>
 <!-- start-smoth-scrolling -->
-			<script type="text/javascript" src="
+<script type="text/javascript" src="
 <?= Yii::getAlias('@web'); ?>/homeindex/js/move-top.js"></script>
-			<script type="text/javascript" src="
+<script type="text/javascript" src="
 <?= Yii::getAlias('@web'); ?>/homeindex/js/easing.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
