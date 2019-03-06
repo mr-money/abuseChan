@@ -1,8 +1,7 @@
 <?php
-
 error_reporting(1);
 
-$target = '/www/abuseChan/'; // 生产环境web目录
+$target = '/www/abuseChan/'; // 目录
 
 $token = 'abuseChan';
 $wwwUser = 'www';
@@ -23,12 +22,12 @@ $signature = "sha1=".hash_hmac('sha1', file_get_contents('php://input'),  $token
 
 if (empty($headers['X-Hub-Signature']) || $headers['X-Hub-Signature'] !== $signature) {
     header('HTTP/1.1 403 Forbidden');
-    exit('error request');
+    exit('error request '.$signature);
 }
 
 $repo = $json['repository'];
 
 $cmd = "cd $target && git pull";
 
-echo shell_exec($cmd);
+print_r(shell_exec($cmd));
 file_put_contents('gitWebhook.log',$repo);
