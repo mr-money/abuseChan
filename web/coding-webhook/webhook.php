@@ -10,14 +10,25 @@ $wwwGroup = 'www';
 
 $json = json_decode(file_get_contents('php://input'), true);
 
-if (empty($json['token']) || $json['token'] !== $token) {
+// 从请求头中获取签名
+$headers = [];
+foreach ($_SERVER as $name => $value) {
+    if (substr($name, 0, 5) == 'HTTP_') {
+        $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+    }
+}
+
+
+$signature = "sha1=".hash_hmac('sha1', file_get_contents('php://input'),  $token );
+
+if (empty($headers['X-Hub-Signature']) || $headers['X-Hub-Signature'] !== $signature) {
     header('HTTP/1.1 403 Forbidden');
     exit('error request');
 }
 
-$repo = $json['repository']['name'];
+$repo = $json['repository'];
 
 $cmd = "cd $target && git pull";
 
-$res = shell_exec($cmd);
-file_put_contents('gitWebhook.log',$res);
+echo shell_exec($cmd);
+file_put_contents('gitWebhook.log',$repo);
