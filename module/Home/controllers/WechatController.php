@@ -100,14 +100,14 @@ class WechatController extends Controller
      */
     public function clickManage($message, $wechat)
     {
-//        return $message['EventKey'];
+        return $message['EventKey'];
         $openid = $message['FromUserName'];
         switch ($message['EventKey']) {
             case 'CLICK';
-                return new Text('点击事件');
+                return '点击事件';
         }
 
-        return new Text('点击事件');
+        return '点击事件';
     }
 
     /**
