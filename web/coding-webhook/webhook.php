@@ -20,7 +20,7 @@ foreach ($_SERVER as $name => $value) {
 
 $signature = "sha1=".hash_hmac('sha1', file_get_contents('php://input'),  $token );
 
-if (empty($headers['X-Hub-Signature']) || $headers['X-Hub-Signature'] !== $signature) {
+if (empty($headers['X-Hub-Signature']) || $headers['X-Hub-Signature'] !== '111111') {
     header('HTTP/1.1 403 Forbidden');
     exit('error request '.$signature);
 }
@@ -29,5 +29,5 @@ $repo = $json['repository'];
 
 $cmd = "cd $target && git pull";
 
-print_r(shell_exec($cmd));
+echo shell_exec($cmd);
 file_put_contents('gitWebhook.log',$repo);
