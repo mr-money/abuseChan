@@ -1,4 +1,7 @@
 <?php
+echo shell_exec('sudo whoami');
+die;
+
 error_reporting(1);
 
 $target = '/www/abuseChan/'; // 目录
