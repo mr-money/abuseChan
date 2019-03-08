@@ -1,11 +1,6 @@
 <?php
 error_reporting(1);
 
-$cmd = "sudo git pull";
-$res = shell_exec($cmd);
-print_r($res);
-die;
-
 $targer = '/www/abuseChan/';
 $token = 'abuseChan';
 
