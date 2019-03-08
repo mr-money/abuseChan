@@ -3,7 +3,7 @@
 域名 abusechan.cn
 
 linux ssh 
-用户名 root
+用户名 root  abusechan
 密码 740363495e=mc2
 
 mysql 
