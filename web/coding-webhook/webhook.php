@@ -6,6 +6,7 @@ $res = shell_exec($cmd);
 print_r($res);
 die;
 
+$targer = '/www/abuseChan/';
 $token = 'abuseChan';
 
 // 从请求头中获取签名
@@ -28,7 +29,7 @@ if (empty($headers['X-Hub-Signature']) || $headers['X-Hub-Signature'] !== $signa
 $json = json_decode($content, true);
 $repo = $json['commits'];
 
-$cmd = "git pull";
+$cmd = "cd $targer && sudo git pull";
 
 $res = shell_exec($cmd);
 print_r($res);
