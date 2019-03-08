@@ -1,4 +1,2 @@
-﻿测试测试git
+﻿test test
 :wq
-
-whoami
