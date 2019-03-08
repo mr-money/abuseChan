@@ -27,7 +27,7 @@ if (empty($headers['X-Hub-Signature']) || $headers['X-Hub-Signature'] !== '11111
 
 $repo = $json['repository'];
 
-$cmd = "cd $target && git pull";
+$cmd = "sudo cd $target && git pull";
 
 echo shell_exec($cmd);
 file_put_contents('gitWebhook.log',$repo);
