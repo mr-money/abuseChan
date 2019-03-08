@@ -3,7 +3,7 @@ error_reporting(1);
 
 $cmd = "git pull";
 $res = shell_exec($cmd);
-$res = shell_exec($cmd);
+print_r($res);
 die;
 
 $token = 'abuseChan';
