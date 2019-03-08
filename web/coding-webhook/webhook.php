@@ -27,5 +27,6 @@ $repo = $json['commits'];
 
 $cmd = "sudo cd $target && git pull";
 
-echo shell_exec($cmd);
-file_put_contents('gitWebhook.log', $repo, FILE_APPEND);
+$res = shell_exec($cmd);
+print_r($repo);
+file_put_contents('gitWebhook.log', $res.'\r\n', FILE_APPEND);
