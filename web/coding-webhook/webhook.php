@@ -28,4 +28,4 @@ $cmd = "cd $targer && sudo git pull";
 
 $res = shell_exec($cmd);
 print_r($res);
-file_put_contents('gitWebhook.log', json_decode($repo).'\r\n', FILE_APPEND);
+file_put_contents('gitWebhook.log', json_encode($repo).'\r\n', FILE_APPEND);
