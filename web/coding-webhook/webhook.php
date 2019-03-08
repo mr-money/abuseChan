@@ -1,14 +1,9 @@
 <?php
-echo shell_exec("sudo whoami");
-die;
 error_reporting(1);
 
 $target = '/www/abuseChan/'; // 目录
 
 $token = 'abuseChan';
-$wwwUser = 'www';
-$wwwGroup = 'www';
-
 
 // 从请求头中获取签名
 $headers = [];
