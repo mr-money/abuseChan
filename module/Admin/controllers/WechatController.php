@@ -91,7 +91,7 @@ class WechatController extends CommonController
         \app\controllers\CommonController::dump($res);
         die;
 //        $time_info = trim(" 16 days,  1:34");
-        $time_info = trim(" 3 min");
+        $time_info = trim(" 6 min");
 //        $time_info = trim(" 1:34");
         if($day = trim(strstr($time_info,'days,',true),'days,')){
             $timeStr = trim(trim(strstr($time_info,'days,'),'days,'));
@@ -103,7 +103,10 @@ class WechatController extends CommonController
             $day = 0;
             $time = explode(':',$time_info);
         }
-        \app\controllers\CommonController::dump($time);
+
+        $uptime = (intval($day)*24*60*60)+(intval($time[0])*60*60)+(intval($time[1])*60);
+
+        \app\controllers\CommonController::dump($uptime);
     }
 
     /**
@@ -153,8 +156,8 @@ class WechatController extends CommonController
             foreach ($hd_array as $k => $v) {
                 $s_array = explode('Size=', $v);
                 $fs_array = explode('FreeSpace=', $s_array[0]);
-                $size = round(trim($s_array[1]) / (1024 * 1024 * 1024), 1);
-                $freespace = round(trim($fs_array[1]) / (1024 * 1024 * 1024), 1);
+                $size = round(floatval(trim($s_array[1])) / (1024 * 1024 * 1024), 1);
+                $freespace = round(floatval(trim($fs_array[1])) / (1024 * 1024 * 1024), 1);
                 $drive = $key[$k];
 
 //                echo $drive . "盘,\r\n已用空间: " . ($size - $freespace) . "GB/" . $size . "GB\r\n可用空间: " . $freespace . "GB\r\n\r\n";
@@ -202,8 +205,8 @@ ETO;
             $phymem = preg_replace("/\s(?=\s)/", "\\1", $out[1]);
             $phymem_array = explode(' ', $phymem);
             //print_r($phymem_array);
-            $freephymem = ceil($phymem_array[0] / 1024);
-            $totalphymem = ceil($phymem_array[1] / 1024);
+            $freephymem = ceil(floatval($phymem_array[0]) / 1024);
+            $totalphymem = ceil(floatval($phymem_array[1]) / 1024);
 //            echo "已用物理内存: ". ($totalphymem - $freephymem) ."MB/". $totalphymem . "MB\r\n空闲物理内存: " . $freephymem . "MB\r\n\r\n";
 
 //            $this->dump("内存占用：" . round(($totalphymem - $freephymem) * 100 / $totalphymem, 2) . '%');
@@ -248,7 +251,7 @@ ETO;
                 $time = explode(':',$time_info);
             }
 
-            $uptime = (intval($day)*24*60*60)+(intval($time[0])*60*60)+(intval($time[1])*60);
+            $uptime = (floatval($day)*24*60*60)+(floatval($time[0])*60*60)+(floatval($time[1])*60);
 
             $server['time'] = array(
                 'uptime' => $uptime,
@@ -264,8 +267,8 @@ ETO;
             $mem_used = trim(trim($mem_info[2], 'used'));
 
             $server['memory'] = array(
-                'usedphymem' => ceil($mem_used / 1024),
-                'totalphymem' => ceil($mem_total / 1024),
+                'usedphymem' => ceil(floatval($mem_used) / 1024),
+                'totalphymem' => ceil(floatval($mem_total) / 1024),
                 'percent' => round(100 * intval($mem_used) / intval($mem_total), 2),  //百分比
             );
 
