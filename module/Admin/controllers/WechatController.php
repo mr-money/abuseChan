@@ -248,7 +248,7 @@ ETO;
                 $time = explode(':',$time_info);
             }
 
-            $uptime = ($day*24*60*60)+($time[0]*60*60)+($time[1]*60);
+            $uptime = (intval($day)*24*60*60)+(intval($time[0])*60*60)+(intval($time[1])*60);
 
             $server['time'] = array(
                 'uptime' => $uptime,
