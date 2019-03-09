@@ -242,6 +242,7 @@
             timeout: 30000,
             dataType: "json",
             success: function (data) {
+                console.log(data);
                 if (data.status == 1000) {
                     $("#memory").text('内存 ' + data.data.memory.percent + '%');
                     $("#memoryPer").text(data.data.memory.usedphymem + 'M / ' + data.data.memory.totalphymem + 'M');
@@ -260,10 +261,8 @@
                 $("#serverTime").next().children("a").removeClass('am-icon-spin');
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                if(textStatus == 'timeout'){
-                    myAlert('暂时获取不到服务器信息了呢');
-                    $("#serverTime").next().children("a").removeClass('am-icon-spin');
-                }
+                myAlert('暂时获取不到服务器信息了呢');
+                $("#serverTime").next().children("a").removeClass('am-icon-spin');
             }
         });
 
@@ -300,10 +299,8 @@
                 $("#serverTime").next().children("a").removeClass('am-icon-spin'); //停止转圈圈
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                if(textStatus == 'timeout'){
-                    myAlert('暂时获取不到服务器信息了呢');
-                    $("#serverTime").next().children("a").removeClass('am-icon-spin'); //停止转圈圈
-                }
+                myAlert('暂时获取不到服务器信息了呢');
+                $("#serverTime").next().children("a").removeClass('am-icon-spin'); //停止转圈圈
             }
         });
     }
