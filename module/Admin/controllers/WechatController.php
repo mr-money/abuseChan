@@ -87,8 +87,9 @@ class WechatController extends CommonController
 
     public function actionTestAjax()
     {
+        $res = $this->getServerInfo();
+        \app\controllers\CommonController::dump($res);
         die;
-        
 //        $time_info = trim(" 16 days,  1:34");
         $time_info = trim(" 3 min");
 //        $time_info = trim(" 1:34");
@@ -103,8 +104,6 @@ class WechatController extends CommonController
             $time = explode(':',$time_info);
         }
         \app\controllers\CommonController::dump($time);
-
-        die;
     }
 
     /**
