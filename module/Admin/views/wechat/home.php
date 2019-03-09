@@ -247,7 +247,7 @@
                     $("#memoryPer").text(data.data.memory.usedphymem + 'M / ' + data.data.memory.totalphymem + 'M');
                     $("#memoryStyle").css('width', data.data.memory.percent + '%');
 
-                    $("#disk").text('内存 ' + data.data.disk.percent + '%');
+                    $("#disk").text('硬盘 ' + data.data.disk.percent + '%');
                     $("#diskPer").text('已用:' + data.data.disk.diskUsed + 'G/' + data.data.disk.diskSum + 'G 可用:' + data.data.disk.diskFree + 'G');
                     $("#diskStyle").css('width', data.data.disk.percent + '%');
 
@@ -283,7 +283,7 @@
                     $("#memoryPer").text(data.data.memory.usedphymem + 'M / ' + data.data.memory.totalphymem + 'M');
                     $("#memoryStyle").css('width', data.data.memory.percent + '%');
 
-                    $("#disk").text('内存 ' + data.data.disk.percent + '%');
+                    $("#disk").text('硬盘 ' + data.data.disk.percent + '%');
                     $("#diskPer").text('已用:' + data.data.disk.diskUsed + 'G/' + data.data.disk.diskSum + 'G 可用:' + data.data.disk.diskFree + 'G');
                     $("#diskStyle").css('width', data.data.disk.percent + '%');
 

@@ -87,9 +87,24 @@ class WechatController extends CommonController
 
     public function actionTestAjax()
     {
-        $server = $this->getServerInfo();
+        die;
+        
+//        $time_info = trim(" 16 days,  1:34");
+        $time_info = trim(" 3 min");
+//        $time_info = trim(" 1:34");
+        if($day = trim(strstr($time_info,'days,',true),'days,')){
+            $timeStr = trim(trim(strstr($time_info,'days,'),'days,'));
+            $time = explode(':',$timeStr);
+        }else if($minue = trim(strstr($time_info,'min',true),'min')){
+            $day = 0;
+            $time = array(0,$minue);
+        }else{
+            $day = 0;
+            $time = explode(':',$time_info);
+        }
+        \app\controllers\CommonController::dump($time);
 
-        \app\controllers\CommonController::dump($server);
+        die;
     }
 
     /**
@@ -200,18 +215,46 @@ ETO;
                 'percent' => round(($totalphymem - $freephymem) * 100 / $totalphymem, 2),
             );
 
-        //系统类型 linux
+            //系统类型 linux
         } else {
-            $fp = popen('top -b -n 2 | grep -E "^(%Cpu|KiB Mem)"', "r");//获取某一时刻系统cpu和内存使用情况
+            $fp = popen('top -b -n 2 | grep -E "^(%Cpu|KiB Mem|top)"', "r");//获取某一时刻系统cpu和内存使用情况
             $rs = "";
+
             while (!feof($fp)) {
                 $rs .= fread($fp, 1024);
             }
             pclose($fp);
-            $sys_info = explode("\n", $rs);
+            $sys_info = explode("\n", $rs); //系统信息
 
-            $cpu_info = explode(",", $sys_info[2]);  //CPU占有量  数组
-            $mem_info = explode(",", $sys_info[3]); //内存占有量 数组
+            $top_info = explode(",",$sys_info[3]); //系统运行时间 数组
+            $cpu_info = explode(",", $sys_info[4]);  //CPU占有量  数组
+            $mem_info = explode(",", $sys_info[5]); //内存占有量 数组
+
+            //系统运行时间
+            $time_info = trim(trim(strstr($top_info[0],'up'),'up'));
+
+            //运行时间超过1天
+            if($day = trim(strstr($time_info,'days,',true),'days,')){
+                $timeStr = trim(trim(strstr($time_info,'days,'),'days,'));
+                $time = explode(':',$timeStr);
+
+            //运行时间不到1小时
+            }else if($minue = trim(strstr($time_info,'min',true),'min')){
+                $day = 0;
+                $time = array(0,$minue);
+
+            //运行时间在1小时到1天之间
+            }else{
+                $day = 0;
+                $time = explode(':',$time_info);
+            }
+
+            $uptime = ($day*24*60*60)+($time[0]*60*60)+($time[1]*60);
+
+            $server['time'] = array(
+                'uptime' => $uptime,
+                'formatTime' => $this->time2second($uptime),
+            );
 
             //CPU占有量
             $cpu_usage = trim(trim($cpu_info[0], '%Cpu(s): '), 'us');  //百分比
@@ -222,8 +265,8 @@ ETO;
             $mem_used = trim(trim($mem_info[2], 'used'));
 
             $server['memory'] = array(
-                'usedphymem' => $mem_used,
-                'totalphymem' => $mem_total,
+                'usedphymem' => ceil($mem_used / 1024),
+                'totalphymem' => ceil($mem_total / 1024),
                 'percent' => round(100 * intval($mem_used) / intval($mem_total), 2),  //百分比
             );
 
@@ -243,17 +286,6 @@ ETO;
                 'diskSum' => sprintf('%.1f', $hd_size),
                 'diskFree' => sprintf('%.1f', $hd_avail),
                 'percent' => $hd_usage,
-            );
-
-            //检测时间
-            $fp = popen("date +\"%Y-%m-%d %H:%M\"", "r");
-            $rs = fread($fp, 1024);
-            pclose($fp);
-            $uptime = trim($rs);
-
-            $server['time'] = array(
-                'uptime' => $uptime,
-                'formatTime' => $this->time2second($uptime),
             );
 
         }
