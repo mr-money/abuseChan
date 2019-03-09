@@ -65,7 +65,7 @@ class WechatController extends CommonController
     {
         $responseData = array();
 
-        return $this->render('home',$responseData);
+        return $this->render('home', $responseData);
     }
 
     /*
@@ -87,7 +87,7 @@ class WechatController extends CommonController
 
     /**
      * @return array(
-            time 运行时间
+     *      time 运行时间
      *      disk 硬盘
      *      CPU
      *      memory 内存
@@ -95,10 +95,11 @@ class WechatController extends CommonController
      */
     public function getServerInfo()
     {
-        set_time_limit (0);
+        //接口限制时间30秒
+        set_time_limit(30);
 
         $server = array(); //系统状态信息
-        //系统类型
+        //系统类型 windows
         if (strtolower(substr(PHP_OS, 0, 3)) == 'win') {
             //已运行时长
             $outTime = '';
@@ -109,12 +110,10 @@ class WechatController extends CommonController
 //            $boottime = $datetime_array[0];
             $uptime = strtotime($localtime) - strtotime($datetime_array[0]);
 
-            $formatTime = $this->time2second($uptime);
-
 //            $this->dump("已运行: " . $formatTime);
             $server['time'] = array(
                 'uptime' => $uptime,
-                'formatTime' => $formatTime,
+                'formatTime' => $this->time2second($uptime),
             );
 
 
@@ -146,9 +145,9 @@ class WechatController extends CommonController
             }
 //            $this->dump("硬盘占用比例：" . round($diskUsed * 100 / $diskSum, 2) . '%');
             $server['disk'] = array(
-                'diskUsed' => sprintf('%.1f',$diskUsed),
-                'diskSum' => sprintf('%.1f',$diskSum),
-                'diskFree'=>sprintf('%.1f',$diskFree),
+                'diskUsed' => sprintf('%.1f', $diskUsed),
+                'diskSum' => sprintf('%.1f', $diskSum),
+                'diskFree' => sprintf('%.1f', $diskFree),
                 'percent' => round($diskUsed * 100 / $diskSum, 2),
             );
 
@@ -165,9 +164,9 @@ ETO;
 
             exec("cscript -nologo $path", $usage);
 
-            try{
+            try {
                 $CPU = $usage[0];
-            }catch(Exception $e){
+            } catch (Exception $e) {
                 // 处理异常
                 $server['CPU'] = 0;
             }
@@ -194,9 +193,62 @@ ETO;
                 'percent' => round(($totalphymem - $freephymem) * 100 / $totalphymem, 2),
             );
 
-
+        //系统类型 linux
         } else {
-            echo 'linux';
+            $fp = popen('top -b -n 2 | grep -E "^(Cpu|Mem)"', "r");//获取某一时刻系统cpu和内存使用情况
+            $rs = "";
+            while (!feof($fp)) {
+                $rs .= fread($fp, 1024);
+            }
+            pclose($fp);
+            $sys_info = explode("\n", $rs);
+
+            $cpu_info = explode(",", $sys_info[4]);  //CPU占有量  数组
+            $mem_info = explode(",", $sys_info[5]); //内存占有量 数组
+
+            //CPU占有量
+            $cpu_usage = trim(trim($cpu_info[0], 'Cpu(s): '), '%us');  //百分比
+            $server['CPU'] = $cpu_usage;
+
+            //内存占有量
+            $mem_total = trim(trim($mem_info[0], 'Mem: '), 'k total');
+            $mem_used = trim($mem_info[1], 'k used');
+
+            $server['memory'] = array(
+                'usedphymem' => $mem_used,
+                'totalphymem' => $mem_total,
+                'percent' => round(100 * intval($mem_used) / intval($mem_total), 2),  //百分比
+            );
+
+            /*硬盘使用率*/
+            $fp = popen('df -lh | grep -E "^(/)"', "r");
+            $rs = fread($fp, 1024);
+            pclose($fp);
+            $rs = preg_replace("/\s{2,}/", ' ', $rs);  //把多个空格换成 “_”
+            $hd = explode(" ", $rs);
+            $hd_size = trim($hd[1], 'G'); //磁盘总空间 单位G
+            $hd_used = trim($hd[2], 'G'); //磁盘已用空间 单位G
+            $hd_avail = trim($hd[3], 'G'); //磁盘可用空间 单位G
+            $hd_usage = trim($hd[4], '%'); //挂载点 百分比
+
+            $server['disk'] = array(
+                'diskUsed' => sprintf('%.1f', $hd_used),
+                'diskSum' => sprintf('%.1f', $hd_size),
+                'diskFree' => sprintf('%.1f', $hd_avail),
+                'percent' => $hd_usage,
+            );
+
+            //检测时间
+            $fp = popen("date +\"%Y-%m-%d %H:%M\"", "r");
+            $rs = fread($fp, 1024);
+            pclose($fp);
+            $uptime = trim($rs);
+
+            $server['time'] = array(
+                'uptime' => $uptime,
+                'formatTime' => $this->time2second($uptime),
+            );
+
         }
 
         return $server;
