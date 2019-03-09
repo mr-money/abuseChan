@@ -235,17 +235,19 @@
 <script>
     $(function () {
         //进入页面第一次获取服务器信息
-        $.post(
-            "<?= \yii\helpers\Url::to(array('get-cpu-ajax')) ?>",
-            {},
-            function (data) {
-//                console.log(data);
+        $.ajax({
+            url: "<?= \yii\helpers\Url::to(array('get-cpu-ajax')) ?>",
+            type: "POST",
+            data: {},
+            timeout: 30000,
+            dataType: "json",
+            success: function (data) {
                 if (data.status == 1000) {
                     $("#memory").text('内存 ' + data.data.memory.percent + '%');
                     $("#memoryPer").text(data.data.memory.usedphymem + 'M / ' + data.data.memory.totalphymem + 'M');
                     $("#memoryStyle").css('width', data.data.memory.percent + '%');
 
-                    $("#disk").text('内存 ' + data.data.disk.percent + '%');
+                    $("#disk").text('硬盘 ' + data.data.disk.percent + '%');
                     $("#diskPer").text('已用:' + data.data.disk.diskUsed + 'G/' + data.data.disk.diskSum + 'G 可用:' + data.data.disk.diskFree + 'G');
                     $("#diskStyle").css('width', data.data.disk.percent + '%');
 
@@ -253,31 +255,35 @@
                     $("#CPUStyle").css('width', data.data.CPU + '%');
 
                     $("#serverTime").text('服务器已运行' + data.data.time.formatTime);
-
-                    $("#serverTime").next().children("a").removeClass('am-icon-spin');
-
-                } else {
-//                    myAlert('暂时获取不到服务器信息了呢');
-                    return;
                 }
 
+                $("#serverTime").next().children("a").removeClass('am-icon-spin');
             },
-            "json"
-        );
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                myAlert('暂时获取不到服务器信息了呢');
+                $("#serverTime").next().children("a").removeClass('am-icon-spin');
+            }
+        });
+
     })
+    
     function getServerInfo(obj) {
+        //爱的魔力转圈圈
         $(obj).addClass('am-icon-spin');
-        $.post(
-            "<?= \yii\helpers\Url::to(array('get-cpu-ajax')) ?>",
-            {},
-            function (data) {
-//                console.log(data);
+
+        $.ajax({
+            url: "<?= \yii\helpers\Url::to(array('get-cpu-ajax')) ?>",
+            type: "POST",
+            data: {},
+            timeout: 30000,
+            dataType: "json",
+            success: function (data) {
                 if (data.status == 1000) {
                     $("#memory").text('内存 ' + data.data.memory.percent + '%');
                     $("#memoryPer").text(data.data.memory.usedphymem + 'M / ' + data.data.memory.totalphymem + 'M');
                     $("#memoryStyle").css('width', data.data.memory.percent + '%');
 
-                    $("#disk").text('内存 ' + data.data.disk.percent + '%');
+                    $("#disk").text('硬盘 ' + data.data.disk.percent + '%');
                     $("#diskPer").text('已用:' + data.data.disk.diskUsed + 'G/' + data.data.disk.diskSum + 'G 可用:' + data.data.disk.diskFree + 'G');
                     $("#diskStyle").css('width', data.data.disk.percent + '%');
 
@@ -285,16 +291,17 @@
                     $("#CPUStyle").css('width', data.data.CPU + '%');
 
                     $("#serverTime").text('服务器已运行' + data.data.time.formatTime);
-
-                    $(obj).removeClass('am-icon-spin');
-                } else {
+                }else {
                     myAlert('暂时获取不到服务器信息了呢');
-                    return;
                 }
 
+                $("#serverTime").next().children("a").removeClass('am-icon-spin'); //停止转圈圈
             },
-            "json"
-        );
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                myAlert('暂时获取不到服务器信息了呢');
+                $("#serverTime").next().children("a").removeClass('am-icon-spin'); //停止转圈圈
+            }
+        });
     }
 </script>
 

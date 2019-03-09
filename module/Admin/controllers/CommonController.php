@@ -14,11 +14,12 @@ class CommonController extends \yii\web\Controller
 
     static $adminMenu; //左侧导航栏
 
+
     public function init()
     {
         parent::init();
 
-        $this->sessionGlobal = \Yii::$app->session;
+        $this->sessionGlobal = \Yii::$app->session; //获取session
 
         $this->apiStatus = \Yii::$app->params['apiStatus']; // 配置config/params
 
@@ -48,16 +49,6 @@ class CommonController extends \yii\web\Controller
         }
 
         return parent::beforeAction($action);
-    }
-
-    /*
-     * 重写dump方法
-     * */
-    public function dump($data)
-    {
-        echo "<pre>";
-            print_r($data);
-        echo "<pre/>";
     }
 
     /**
