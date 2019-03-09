@@ -242,7 +242,6 @@
             timeout: 30000,
             dataType: "json",
             success: function (data) {
-                console.log(data);
                 if (data.status == 1000) {
                     $("#memory").text('内存 ' + data.data.memory.percent + '%');
                     $("#memoryPer").text(data.data.memory.usedphymem + 'M / ' + data.data.memory.totalphymem + 'M');

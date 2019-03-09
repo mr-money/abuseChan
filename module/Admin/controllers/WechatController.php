@@ -85,6 +85,13 @@ class WechatController extends CommonController
         return json_encode($response);
     }
 
+    public function actionTestAjax()
+    {
+        $server = $this->getServerInfo();
+
+        \app\controllers\CommonController::dump($server);
+    }
+
     /**
      * @return array(
      *      time 运行时间
