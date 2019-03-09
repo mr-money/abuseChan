@@ -202,7 +202,7 @@ ETO;
 
         //系统类型 linux
         } else {
-            $fp = popen('top -b -n 2 | grep -E "^(Cpu|Mem)"', "r");//获取某一时刻系统cpu和内存使用情况
+            $fp = popen('top -b -n 2 | grep -E "^(%Cpu|KiB Mem)"', "r");//获取某一时刻系统cpu和内存使用情况
             $rs = "";
             while (!feof($fp)) {
                 $rs .= fread($fp, 1024);
@@ -210,16 +210,16 @@ ETO;
             pclose($fp);
             $sys_info = explode("\n", $rs);
 
-            $cpu_info = explode(",", $sys_info[4]);  //CPU占有量  数组
-            $mem_info = explode(",", $sys_info[5]); //内存占有量 数组
+            $cpu_info = explode(",", $sys_info[2]);  //CPU占有量  数组
+            $mem_info = explode(",", $sys_info[3]); //内存占有量 数组
 
             //CPU占有量
-            $cpu_usage = trim(trim($cpu_info[0], 'Cpu(s): '), '%us');  //百分比
+            $cpu_usage = trim(trim($cpu_info[0], '%Cpu(s): '), 'us');  //百分比
             $server['CPU'] = $cpu_usage;
 
             //内存占有量
-            $mem_total = trim(trim($mem_info[0], 'Mem: '), 'k total');
-            $mem_used = trim($mem_info[1], 'k used');
+            $mem_total = trim(trim($mem_info[0], 'KiB Mem: '), 'total');
+            $mem_used = trim(trim($mem_info[2], 'used'));
 
             $server['memory'] = array(
                 'usedphymem' => $mem_used,
