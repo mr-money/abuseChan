@@ -79,9 +79,9 @@ return [
          * 账号基本信息，请从微信公众平台/开放平台获取
          */
         'app_id'  => 'wxa47b5b64afdb7376',         // AppID
-        'secret'  => 'your-app-secret',     // AppSecret
+        'secret'  => '5dc7779abc03796890d35e41dbfa6902',     // AppSecret
         'token'   => 'mamajiang',          // Token
-        'aes_key' => '',                    // EncodingAESKey，兼容与安全模式下请一定要填写！！！
+        'aes_key' => 'Vkfz6VAU6YsGlku8LrodnGuUj8OGOqYdAsfy012sm9W', // EncodingAESKey，兼容与安全模式下请一定要填写！！！
 
         /**
          * 指定 API 调用返回结果的类型：array(default)/collection/object/raw/自定义类名

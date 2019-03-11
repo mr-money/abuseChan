@@ -14,3 +14,8 @@ ftp
 用户名 wwwroot
 密码 740363495e=mc2
  
+
+微信公众平台
+AppID  wxa47b5b64afdb7376
+AppSecret  5dc7779abc03796890d35e41dbfa6902
+Token  mamajiang
