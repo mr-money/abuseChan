@@ -39,6 +39,14 @@ $config = [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
+                    'logVars' => ['*'],
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'categories' => ['wechat'],
+                    'levels' => ['error', 'warning','info'],
+                    'logVars' => ['*'],
+                    'logFile' => '@runtime/logs/wechat.log',
                 ],
             ],
         ],
