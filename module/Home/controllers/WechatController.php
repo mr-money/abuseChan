@@ -35,7 +35,7 @@ class WechatController extends Controller
             $this->wechatLog($message); //记log
 
             //消息事件处理
-            return $this->messageMange($message, $wechat);
+            $this->messageMange($message, $wechat);
         });
 
         $wechat->server->serve()->send();
