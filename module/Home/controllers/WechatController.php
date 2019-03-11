@@ -7,32 +7,11 @@ use yii\web\Controller;
 class WechatController extends Controller
 {
     public $layout = false; //不使用默认布局
+    public $enableCsrfValidation = false; //不验证csrf
 
     public function init()
     {
         parent::init();
-    }
-
-    /**
-     * 重写方法不验证csrf
-     * @param $action
-     * @return bool
-     * @throws \yii\web\BadRequestHttpException
-     */
-    public function beforeAction($action)
-    {
-
-        $currentaction = $action->id;
-
-        $novalidactions = ['upload-image'];
-
-        if (in_array($currentaction, $novalidactions)) {
-
-            $action->controller->enableCsrfValidation = false;
-        }
-        parent::beforeAction($action);
-
-        return true;
     }
 
     public function wechatLog($message)
