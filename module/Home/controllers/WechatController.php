@@ -72,7 +72,7 @@ class WechatController extends Controller
                 return '收到事件消息';
                 break;
             case 'text':
-                return "收到\n文字消息\r\n" . $message['MsgType'];
+//                return "收到\n文字消息\r\n" . $message['MsgType'];
                 break;
             case 'image':
                 return '收到图片消息';
