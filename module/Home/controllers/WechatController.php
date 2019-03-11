@@ -28,14 +28,11 @@ class WechatController extends Controller
         $server = \Yii::$app->wechat->app->server;
 
         $server->push(function ($message) {
-            $this->wechatLog($message);
-
             \Yii::info($message,'wechat'); //记log
 
             return '啥？';
             //消息事件处理
-            $wechat = \Yii::$app->wechat->app;
-            return $this->messageMange($message, $wechat);
+            return $this->messageMange($message);
         });
 
         $response = $server->serve();
@@ -70,7 +67,7 @@ class WechatController extends Controller
                 return '收到事件消息';
                 break;
             case 'text':
-//                return "收到\n文字消息\r\n" . $message['MsgType'];
+                return "收到\n文字消息\r\n" . $message['MsgType'];
                 break;
             case 'image':
                 return '收到图片消息';
