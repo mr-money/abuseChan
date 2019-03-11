@@ -41,7 +41,7 @@ class WechatController extends Controller
         });
 
         $response = $server->serve();
-        return $response->send();
+        $response->send();
     }
 
     /**
