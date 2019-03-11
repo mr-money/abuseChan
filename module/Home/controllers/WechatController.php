@@ -16,7 +16,7 @@ class WechatController extends Controller
 
     public function wechatLog($message)
     {
-        \Yii::info($message,'wechat');
+        \Yii::info($message, 'wechat');
     }
 
     public function actionTest()
@@ -33,9 +33,8 @@ class WechatController extends Controller
         $wechat = \Yii::$app->wechat->app;
         $server = $wechat->server;
 
-        $server->push(function ($message) {
+        $server->push(function ($message, $wechat) {
             $this->wechatLog($message); //记log
-            return "欢迎关注！！！";
 
             //消息事件处理
             return $this->messageMange($message, $wechat);
@@ -154,7 +153,7 @@ class WechatController extends Controller
                     $result->save();
                 }*/
 
-        return '欢迎关注';
+        return '明月直入，无心可猜';
     }
 
     /**
@@ -166,10 +165,10 @@ class WechatController extends Controller
      */
     public function unsubscribeManage($message, $wechat)
     {
-/*        $wxuser = new Wxuser;
-        $result = $wxuser->where(array('openid' => $message['FromUserName']))->first();
-        $result->is_subscribe = 0;
-        $result->save();*/
+        /*        $wxuser = new Wxuser;
+                $result = $wxuser->where(array('openid' => $message['FromUserName']))->first();
+                $result->is_subscribe = 0;
+                $result->save();*/
 
         return '取消关注';
     }
