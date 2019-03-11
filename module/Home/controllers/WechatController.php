@@ -33,7 +33,7 @@ class WechatController extends Controller
             return $this->messageMange($message, $wechat);
         });
 
-        return $wechat->server->serve();
+        $wechat->server->serve()->send();
     }
 
     /**
