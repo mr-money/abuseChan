@@ -29,20 +29,23 @@ class WechatController extends Controller
      */
     public function actionServer()
     {
-        $wechat = \Yii::$app->wechat->app;
+        $wechat = \Yii::$app->wechat->getApp();
+        $server = $wechat->server;
 
-        $wechat->server->push(function ($message) use ($wechat) {
+        $server->setMessageHandler(function ($message) {
             $this->wechatLog($message); //记log
+            return "欢迎关注！！！";
 
             //消息事件处理
-            $this->messageMange($message, $wechat);
+            return $this->messageMange($message, $wechat);
         });
 
-        $wechat->server->serve()->send();
+        $response = $server->serve();
+        return $response->send();
     }
 
     /**
-     * 消息管理
+     * 事件管理
      *
      * @param $message
      * @param $wechat
