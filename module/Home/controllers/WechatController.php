@@ -14,11 +14,6 @@ class WechatController extends Controller
         parent::init();
     }
 
-    public function wechatLog($message)
-    {
-        \Yii::info($message, 'wechat');
-    }
-
     public function actionTest()
     {
         return $this->render('test');
@@ -33,7 +28,9 @@ class WechatController extends Controller
         $server = \Yii::$app->wechat->app->server;
 
         $server->push(function ($message) {
-            $this->wechatLog($message); //记log
+            $this->wechatLog($message);
+
+            \Yii::info($message,'wechat'); //记log
 
             return '啥？';
             //消息事件处理
