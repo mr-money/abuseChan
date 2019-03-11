@@ -30,13 +30,13 @@ class WechatController extends Controller
      */
     public function actionServer()
     {
-        $wechat = \Yii::$app->wechat->app;
-        $server = $wechat->server;
+        $server = \Yii::$app->wechat->app->server;
 
-        $server->push(function ($message, $wechat) {
+        $server->push(function ($message) {
             $this->wechatLog($message); //记log
 
             //消息事件处理
+            $wechat = \Yii::$app->wechat->app;
             return $this->messageMange($message, $wechat);
         });
 
