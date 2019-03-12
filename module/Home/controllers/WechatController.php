@@ -129,12 +129,41 @@ class WechatController extends Controller
             return \Yii::$app->wechat->authorizeRequired()->send();
         }
 
-        $wxuser = \Yii::$app->wechat->user;
+        $openid = $message['FromUserName'];
+
+        $wxuser = \Yii::$app->wechat->getUser($openid);
         \Yii::info($wxuser,'wxuser');
 
         //保存用户信息
+        $userData = array(
+            'openid' => '',
+            'nickname' => '',
+            'avatar' => '',
+        );
 //        WxUser::add();
+        /*        $wxuser = new Wxuser;
+                        $user_info['openid'] = $message['FromUserName'];
 
+                        $result = $wxuser->where(array('openid'=>$user_info['openid']))->first();
+                        if(is_null($result)){
+                            $userService = $wechat->user;
+                            $user = $userService->get($user_info['openid']);
+                //            Log::info($user);
+                            $wxuser->openid =  $user_info['openid'];
+                            $wxuser->nickname =  $user['nickname'];
+                            $wxuser->avatar =  $user['headimgurl'];
+                            $wxuser->sex =  $user['sex'];
+                            $wxuser->is_subscribe =  1;
+                            $wxuser->subscribe_time =  $user['subscribe_time'];
+
+                            $wxuser->save();
+                            //数据发送到erp
+                            $this->sendErp($wxuser->toArray(),$user_info['openid']);
+
+                        }else{
+                            $result->is_subscribe =  1;
+                            $result->save();
+                        }*/
         return '明月直入，无心可猜';
     }
 
