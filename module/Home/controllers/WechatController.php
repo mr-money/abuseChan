@@ -131,18 +131,18 @@ class WechatController extends Controller
 
         $openid = $message['FromUserName'];
 
-        $wxuser = \Yii::$app->wechat->getUser($openid);
+        $wxuser = \Yii::$app->wechat->user->get($openid);
+        \Yii::info($wxuser,'wxuser');
+
         $userData = array(
-            'openid' => $wxuser['openid'],
-            'nickname' => $wxuser['nickname'],
-            'avatar' => $wxuser['avatar'],
-            'sex' => $wxuser['sex'],
+            'openid' => $wxuser->openId,
+            'nickname' => $wxuser->nickname,
+            'avatar' => $wxuser->avatar,
             'is_subscribe' => 1,
             'createTime' => date('Y-m-d H:i:s',time()),
             'updateTime' => date('Y-m-d H:i:s',time()),
         );
 
-        \Yii::info($userData,'wxuser');
 
 
 //        WxUser::add();
