@@ -129,12 +129,47 @@ class WechatController extends Controller
             return \Yii::$app->wechat->authorizeRequired()->send();
         }
 
-        $wxuser = \Yii::$app->wechat->user;
-        \Yii::info($wxuser,'wxuser');
+        $openid = $message['FromUserName'];
+
+        $wxuser = \Yii::$app->wechat->getUser($openid);
 
         //保存用户信息
-//        WxUser::add();
+        $userData = array(
+            'openid' => $wxuser['openid'],
+            'nickname' => $wxuser['nickname'],
+            'avatar' => $wxuser['avatar'],
+            'sex' => $wxuser['sex'],
+            'is_subscribe' => 1,
+            'createTime' => date('Y-m-d H:i:s',time()),
+            'updateTime' => date('Y-m-d H:i:s',time()),
+        );
 
+        \Yii::info($userData,'wxuser');
+
+//        WxUser::add();
+        /*        $wxuser = new Wxuser;
+                        $user_info['openid'] = $message['FromUserName'];
+
+                        $result = $wxuser->where(array('openid'=>$user_info['openid']))->first();
+                        if(is_null($result)){
+                            $userService = $wechat->user;
+                            $user = $userService->get($user_info['openid']);
+                //            Log::info($user);
+                            $wxuser->openid =  $user_info['openid'];
+                            $wxuser->nickname =  $user['nickname'];
+                            $wxuser->avatar =  $user['headimgurl'];
+                            $wxuser->sex =  $user['sex'];
+                            $wxuser->is_subscribe =  1;
+                            $wxuser->subscribe_time =  $user['subscribe_time'];
+
+                            $wxuser->save();
+                            //数据发送到erp
+                            $this->sendErp($wxuser->toArray(),$user_info['openid']);
+
+                        }else{
+                            $result->is_subscribe =  1;
+                            $result->save();
+                        }*/
         return '明月直入，无心可猜';
     }
 
