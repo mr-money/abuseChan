@@ -131,13 +131,9 @@ class WechatController extends Controller
 
         $openid = $message['FromUserName'];
 
-<<<<<<< HEAD
         $wxuser = \Yii::$app->wechat->user->get($openid);
         \Yii::info($wxuser,'wxuser');
 
-=======
-        $wxuser = \Yii::$app->wechat->user;
->>>>>>> 26172ffbb039a705246129ac6b2978c2a6b069ce
         $userData = array(
             'openid' => $wxuser->openId,
             'nickname' => $wxuser->nickname,
