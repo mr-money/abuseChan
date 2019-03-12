@@ -68,7 +68,7 @@ class WechatController extends Controller
                 return '收到事件消息';
                 break;
             case 'text':
-                return "what?";
+//                return "what?";
                 break;
             case 'image':
                 return '收到图片消息';
@@ -121,6 +121,9 @@ class WechatController extends Controller
      */
     public function subscribeMange($message)
     {
+        return '明月直入，无心可猜';
+
+
         //下面是你点击关注时，进行的操作
         if(\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized())
         {
@@ -130,11 +133,10 @@ class WechatController extends Controller
         $openid = $message['FromUserName'];
 
         $wechat = \Yii::$app->wechat->app;
-        $wxuser = $wechat->user->get($openid);
+//        $wxuser = $wechat->user->get($openid);
 
         \Yii::info($wxuser,'wxuser');
 
-        return '明月直入，无心可猜';
 
         $userData = array(
             'openid' => $wxuser->openId,
