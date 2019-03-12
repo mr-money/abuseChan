@@ -53,7 +53,7 @@ $config = [
                     'categories' => ['wxuser'],
                     'levels' => ['error', 'warning','info'],
                     'logVars' => ['*'],
-                    'logFile' => '@runtime/logs/weuxer/'.date('Ymd').'.log',
+                    'logFile' => '@runtime/logs/wxuser/'.date('Ymd').'.log',
                 ],
             ],
         ],
