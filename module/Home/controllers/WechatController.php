@@ -133,6 +133,8 @@ class WechatController extends Controller
 
         $wxuser = \Yii::$app->wechat->user->get($openid);
         \Yii::info($wxuser,'wxuser');
+        
+        return '明月直入，无心可猜';
 
         $userData = array(
             'openid' => $wxuser->openId,
@@ -169,7 +171,6 @@ class WechatController extends Controller
                             $result->is_subscribe =  1;
                             $result->save();
                         }*/
-        return '明月直入，无心可猜';
     }
 
     /**
