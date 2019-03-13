@@ -1,4 +1,4 @@
-# phpstorm project files
+﻿# phpstorm project files
 .idea
 
 # netbeans project files
@@ -34,9 +34,6 @@ tests/_support/_generated
 
 #数据库配置文件
 /config/db.php
-
-#缓存文件
-/runtime
 
 #前端模板文件
 /adminHTML
