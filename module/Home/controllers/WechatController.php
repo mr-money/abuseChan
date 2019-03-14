@@ -19,6 +19,13 @@ class WechatController extends Controller
 
     public function actionTest()
     {
+        $openid = "oqpPK1WXbZ1rs5VkjLny3nC4GUs8";
+
+        $wechat = \Yii::$app->wechat->app;
+        $wxuser = $wechat->user->get($openid);
+
+        print_r($wxuser);
+
         return $this->render('test');
     }
 
@@ -133,7 +140,7 @@ class WechatController extends Controller
         $openid = $message['FromUserName'];
 
         $wechat = \Yii::$app->wechat->app;
-//        $wxuser = $wechat->user->get($openid);
+        $wxuser = $wechat->user->get($openid);
 
         \Yii::info($wxuser,'wxuser');
 
