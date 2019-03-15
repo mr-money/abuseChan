@@ -26,9 +26,9 @@ class WechatController extends Controller
 
         print_r($wxuser);*/
 
-        if(Yii::$app->wechat->isWechat && !Yii::$app->wechat->isAuthorized())
+        if(\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized())
         {
-            return Yii::$app->wechat->authorizeRequired()->send();
+            return \Yii::$app->wechat->authorizeRequired()->send();
         }
 
         $wxuser = \Yii::$app->wechat->user;
