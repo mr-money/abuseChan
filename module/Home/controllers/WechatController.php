@@ -19,11 +19,19 @@ class WechatController extends Controller
 
     public function actionTest()
     {
-        $openid = "oqpPK1WXbZ1rs5VkjLny3nC4GUs8";
+        /*$openid = "oqpPK1WXbZ1rs5VkjLny3nC4GUs8";
 
         $wechat = \Yii::$app->wechat->app;
         $wxuser = $wechat->user->get($openid);
 
+        print_r($wxuser);*/
+
+        if(Yii::$app->wechat->isWechat && !Yii::$app->wechat->isAuthorized())
+        {
+            return Yii::$app->wechat->authorizeRequired()->send();
+        }
+
+        $wxuser = \Yii::$app->wechat->user;
         print_r($wxuser);
 
         return $this->render('test');
