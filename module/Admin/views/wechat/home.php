@@ -259,7 +259,9 @@
 
                 $("#serverTime").next().children("a").removeClass('am-icon-spin');
             },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            error: function (httpRequest, textStatus, errorThrown) {
+                console.log(httpRequest);
+
                 myAlert('暂时获取不到服务器信息了呢');
                 $("#serverTime").next().children("a").removeClass('am-icon-spin');
             }
@@ -297,7 +299,9 @@
 
                 $("#serverTime").next().children("a").removeClass('am-icon-spin'); //停止转圈圈
             },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            error: function (httpRequest, textStatus, errorThrown) {
+                console.log(httpRequest);
+
                 myAlert('暂时获取不到服务器信息了呢');
                 $("#serverTime").next().children("a").removeClass('am-icon-spin'); //停止转圈圈
             }
