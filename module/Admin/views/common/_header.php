@@ -44,7 +44,7 @@
                         <li class="tpl-dropdown-menu-messages">
                             <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
                                 <div class="menu-messages-ico">
-                                    <img src="assets/img/user04.png" alt="">
+                                    <img src="<?= Yii::getAlias('@web'); ?>/AmazeUI/img/user06.png" alt="">
                                 </div>
                                 <div class="menu-messages-time">
                                     3小时前
@@ -65,7 +65,7 @@
                         <li class="tpl-dropdown-menu-messages">
                             <a href="javascript:;" class="tpl-dropdown-menu-messages-item am-cf">
                                 <div class="menu-messages-ico">
-                                    <img src="assets/img/user02.png" alt="">
+                                    <img src="<?= Yii::getAlias('@web'); ?>/AmazeUI/img/user05.png" alt="">
                                 </div>
                                 <div class="menu-messages-time">
                                     5天前
