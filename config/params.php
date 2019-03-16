@@ -21,6 +21,12 @@ return [
                     'navChild' => array(),
                 ),
                 array(
+                    'name' => '微信菜单编辑',
+                    'url' => "menu",
+                    'logo' => "am-icon-weixin sidebar-nav-link-logo",
+                    'navChild' => array(),
+                ),
+                array(
                     'name' => '表格',
                     'url' => "",
                     'logo' => "am-icon-table sidebar-nav-link-logo",

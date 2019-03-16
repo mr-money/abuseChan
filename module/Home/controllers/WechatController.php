@@ -34,6 +34,8 @@ class WechatController extends Controller
         $wxuser = \Yii::$app->wechat->user;
         print_r($wxuser);
 
+
+
         return $this->render('test');
     }
 

@@ -295,4 +295,13 @@ ETO;
         return $server;
     }
 
+    /**
+     * 微信菜单编辑
+     */
+    public function actionMenu()
+    {
+        $responseData = array();
+
+        return $this->render('menu', $responseData);
+    }
 }
