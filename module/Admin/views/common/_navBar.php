@@ -125,8 +125,8 @@
 
 <script>
     function navRedirect(title,url) {
+        console.log(url);
         if(url !== ''){
-            console.log(url);
             iframeRedirect(title,url);
         }
     }

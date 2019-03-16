@@ -360,11 +360,13 @@ $('.tpl-skiner-toggle').on('click', function () {
 })
 
 $('.tpl-skiner-content-bar').find('span').on('click', function () {
-    $('body').attr('class', $(this).attr('data-color'))
+    $('body').attr('class', $(this).attr('data-color'));
+    $("#admin-index-content-iframe").contents().find("body").attr('class', $(this).attr('data-color'));
+
     saveSelectColor.Color = $(this).attr('data-color');
     // 保存选择项
     storageSave(saveSelectColor);
-
+    // self.location.reload();
 })
 
 
