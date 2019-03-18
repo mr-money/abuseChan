@@ -10,7 +10,7 @@
             <p class="page-header-description">骂骂酱 一个能和你对骂的公众号</p>
         </div>
         <div class="am-u-lg-3 tpl-index-settings-button">
-            <button type="button" class="page-header-button"><span class="am-icon-paint-brush"></span> 设置
+            <button type="button" class="page-header-button am-radius" onclick="refreshIframe()"><span class="am-icon-refresh"></span>
             </button>
         </div>
     </div>

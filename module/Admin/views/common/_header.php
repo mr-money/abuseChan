@@ -26,13 +26,6 @@
                     <a href="javascript:;">骂骂酱, <span>欢迎主人</span> </a>
                 </li>
 
-                <!--刷新框架类容-->
-                <li class="am-text-sm">
-                    <a href="javascript:self.location.reload();">
-                        <span class="am-icon-refresh"></span>
-                    </a>
-                </li>
-
                 <!-- 新邮件 -->
                 <li class="am-dropdown tpl-dropdown" data-am-dropdown>
                     <a href="javascript:;" class="am-dropdown-toggle tpl-dropdown-toggle" data-am-dropdown-toggle>
