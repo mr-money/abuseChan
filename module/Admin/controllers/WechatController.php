@@ -2,6 +2,8 @@
 
 namespace app\module\Admin\controllers;
 
+use app\models\AdminUser;
+
 class WechatController extends CommonController
 {
     public function init()
@@ -316,5 +318,21 @@ ETO;
         $responseData = array();
 
         return $this->render('menu', $responseData);
+    }
+
+    /**
+     * 账号信息
+     */
+    public function actionAdminUser()
+    {
+        //通过session查询数据库用户信息
+        $admin = $this->sessionGlobal->get('admin');
+
+        $where['id'] = $admin['id'];
+        $adminUser = AdminUser::find($where)->asArray()->one();
+//        var_dump($adminUser);
+
+        $responseData = array('admin',$adminUser);
+        return $this->render('adminUser', $responseData);
     }
 }
