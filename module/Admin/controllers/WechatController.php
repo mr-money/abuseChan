@@ -235,10 +235,18 @@ ETO;
             //系统运行时间
             $time_info = trim(trim(strstr($top_info[0],'up'),'up'));
 
+            //test
+//            $top_info[0] = 'top - 17:00:46 up 7 days';
+//            $top_info[1] = '  49';
 
             //运行时间超过1天
             if($day = trim(strstr($time_info,'days',true),'days')){
                 $time = explode(':',trim($top_info[1]));
+
+                //超过一天，不到一小时
+                if(count($time) == 1){
+                    $time = array(0,$time[0]);
+                }
 
                 //运行时间不到1小时
             }else if($minue = trim(strstr($time_info,'min',true),'min')){
@@ -249,6 +257,11 @@ ETO;
             }else{
                 $day = 0;
                 $time = explode(':',$time_info);
+
+                //不到一小时
+                if(count($time) == 1){
+                    $time = array(0,$time[0]);
+                }
             }
 
             $uptime = (floatval($day)*24*60*60)+(floatval($time[0])*60*60)+(floatval($time[1])*60);
@@ -300,29 +313,6 @@ ETO;
      */
     public function actionMenu()
     {
-        //系统运行时间
-        $top_info[0] = 'top - 17:00:46 up 7 days';
-        $top_info[1] = '  1:03';
-
-        $time_info = trim(trim(strstr($top_info[0],'up'),'up'));
-
-
-        //运行时间超过1天
-        if($day = trim(strstr($time_info,'days',true),'days')){
-
-            $time = explode(':',trim($top_info[1]));
-
-            //运行时间不到1小时
-        }else if($minue = trim(strstr($time_info,'min',true),'min')){
-            $day = 0;
-            $time = array(0,$minue);
-
-            //运行时间在1小时到1天之间
-        }else{
-            $day = 0;
-            $time = explode(':',$time_info);
-        }
-
         $responseData = array();
 
         return $this->render('menu', $responseData);
