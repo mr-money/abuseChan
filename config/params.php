@@ -16,13 +16,13 @@ return [
             'navLink' => array(
                 array(
                     'name' => '首页',
-                    'url' => "home",
+                    'url' => "wechat/home",
                     'logo' => "am-icon-home sidebar-nav-link-logo",
                     'navChild' => array(),
                 ),
                 array(
                     'name' => '微信菜单编辑',
-                    'url' => "menu",
+                    'url' => "wechat/menu",
                     'logo' => "am-icon-weixin sidebar-nav-link-logo",
                     'navChild' => array(),
                 ),
