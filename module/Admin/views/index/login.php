@@ -67,7 +67,7 @@ $this->registerCsrfMetaTags();
 
                     <button type="button"
                             class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn"
-                            id="submitLogin">提交
+                            id="submitLogin">登陆
                     </button>
 
                 </div>
@@ -88,6 +88,10 @@ $this->registerCsrfMetaTags();
     })
 
     $("#submitLogin").click(function () {
+        const $this = $(this);
+        $this.attr('disabled',true);
+        var html = "<span class='am-icon-spinner am-icon-pulse'></span>&nbsp;&nbsp;正在登陆...";
+        $this.html(html)
 
         //判空
 //        myAlert('用户名不能为空哦');
@@ -126,6 +130,8 @@ $this->registerCsrfMetaTags();
                     },5000)
 
                 }else{
+                    $this.html('登陆');
+                    $this.attr('disabled',false);
                     myAlert(data.message);
                     return;
                 }
