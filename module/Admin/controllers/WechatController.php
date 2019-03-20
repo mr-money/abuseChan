@@ -325,6 +325,7 @@ ETO;
      */
     public function actionAdminUser()
     {
+        $responseData = array();
         //通过session查询数据库用户信息
         $admin = $this->sessionGlobal->get('admin');
 
@@ -332,7 +333,15 @@ ETO;
         $adminUser = AdminUser::find($where)->asArray()->one();
 //        var_dump($adminUser);
 
-        $responseData = array('admin',$adminUser);
+        $responseData['admin'] = $adminUser;
         return $this->render('adminUser', $responseData);
+    }
+
+    public function actionSaveAdminAjax()
+    {
+        $post = \Yii::$app->request->post();
+
+
+        return json_encode($_FILES);
     }
 }
