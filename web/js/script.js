@@ -20,6 +20,7 @@ function updateInfo(e) {
 ;
 
 function fileSelectHandler(img,view) {
+    // console.log($("#"+img).parent(".tpl-form-file-img"));
     // get selected file
     var oFile = $('#'+img)[0].files[0];
 
@@ -28,7 +29,7 @@ function fileSelectHandler(img,view) {
     }
 
     // hide all errors
-    $('.error').hide();
+    // $('.error').hide();
 
     // check for image type (jpg and png are allowed)
     var rFilter = /^(image\/jpeg|image\/png|image\/jpg)$/i;
@@ -81,8 +82,6 @@ function fileSelectHandler(img,view) {
                 // Store the Jcrop API in the jcrop_api variable
                 jcrop_api = this;
             });
-            $(".jcrop-holder img").css('width',boundx);
-            $(".jcrop-holder img").css('height',boundx);
         };
     };
 
