@@ -4,9 +4,9 @@
         <div class="tpl-user-panel-slide-toggleable">
             <div class="tpl-user-panel-profile-picture">
                 <!--头像-->
-                <img src="<?= $admin['avatar']; ?>" alt="">
+                <img src="<?= $admin['avatar']; ?>" alt="" id="admin-avatar">
             </div>
-            <span class="user-panel-logged-in-text">
+            <span class="user-panel-logged-in-text" id="admin-nickname">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
               <?= $admin['nickname']; ?>
           </span>

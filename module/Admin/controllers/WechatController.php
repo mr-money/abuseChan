@@ -36,7 +36,7 @@ class WechatController extends CommonController
 
 
         //默认头像
-        $admin['avatar'] = empty($admin['avatar']) ? \Yii::$app->homeUrl . 'AmazeUI/img/user04.png' : UPLOAD_DIR . '/avatar' . $admin['avatar'];
+        $admin['avatar'] = empty($admin['avatar']) ? \Yii::$app->homeUrl . 'AmazeUI/img/user06.png' : $admin['avatar'];
         $responseData['admin'] = $admin;
 
         return $this->render('index', $responseData);
@@ -331,17 +331,49 @@ ETO;
 
         $where['id'] = $admin['id'];
         $adminUser = AdminUser::find($where)->asArray()->one();
-//        var_dump($adminUser);
 
         $responseData['admin'] = $adminUser;
         return $this->render('adminUser', $responseData);
     }
 
+
     public function actionSaveAdminAjax()
     {
         $post = \Yii::$app->request->post();
 
+        $adminId = $this->sessionGlobal->get('admin')['id'];
+        $where['id'] = $adminId;
 
-        return json_encode($_FILES);
+        $data = array(
+            'nickname' => htmlspecialchars($post['nickname']),
+            'telphone' => htmlspecialchars($post['telphone']),
+            'realname' => htmlspecialchars($post['realname']),
+            'avatar' => $post['avatar'], // 头像 base64
+            'backup' => htmlspecialchars($post['backup']),
+            'updated_at' => date("Y-m-d H:i:s",time()),
+        );
+
+        $res = AdminUser::updateAll($data,$where);
+
+        //修改失败
+        if(!$res){
+            return array(
+                'status' => $this->apiStatus['ERROR'],
+                'message' => '网络异常，修改失败',
+            );
+        }
+
+        //修改成功
+        $response = array(
+            'status' => $this->apiStatus['SUCCESS'],
+            'message' => '修改成功',
+        );
+
+        //session更新
+        $admin = AdminUser::find($where)->asArray()->one();
+        $this->sessionGlobal->set('admin',$admin);
+
+        $response['data'] = $admin;
+        return json_encode($response);
     }
 }
