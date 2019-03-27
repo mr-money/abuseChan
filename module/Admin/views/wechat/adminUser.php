@@ -1,17 +1,11 @@
 <?php
 echo $this->render('../common/_layout');
 
-//\app\assets\AppAsset::addJs($this,Yii::$app->request->baseUrl."/js/jquery.Jcrop.js");
-//\app\assets\AppAsset::addJs($this,Yii::$app->request->baseUrl."/js/script.js");
+\app\assets\AppAsset::addJs($this,Yii::$app->request->baseUrl."/cropper/js/cropper.min.js");
+\app\assets\AppAsset::addJs($this,Yii::$app->request->baseUrl."/cropper/js/script.js");
 
-//\app\assets\AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/jquery.Jcrop.css");
-
-
-\app\assets\AppAsset::addJs($this,Yii::$app->request->baseUrl."cropper/js/cropper.min.js");
-\app\assets\AppAsset::addJs($this,Yii::$app->request->baseUrl."cropper/js/script.js");
-
-\app\assets\AppAsset::addCss($this,Yii::$app->request->baseUrl."cropper/css/ImgCropping.css");
-\app\assets\AppAsset::addCss($this,Yii::$app->request->baseUrl."cropper/css/cropper.min.css");
+\app\assets\AppAsset::addCss($this,Yii::$app->request->baseUrl."/cropper/css/ImgCropping.css");
+\app\assets\AppAsset::addCss($this,Yii::$app->request->baseUrl."/cropper/css/cropper.min.css");
 ?>
 
 <?php $this->beginBody(); ?>
