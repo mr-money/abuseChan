@@ -3,9 +3,10 @@
 namespace app\module\Admin\controllers;
 
 use app\models\AdminUser;
+use yii\web\Controller;
 use yii\web\Cookie;
 
-class IndexController extends \yii\web\Controller
+class IndexController extends Controller
 {
     public $layout = false; //不使用默认布局
 

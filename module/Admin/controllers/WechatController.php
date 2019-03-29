@@ -337,6 +337,15 @@ ETO;
     }
 
 
+    /**
+     * 保存管理员信息
+     * @param nickname 昵称
+     * @param telphone 手机号
+     * @param realname 真实姓名
+     * @param avatar 头像 base64
+     * @param backup 备注
+     * @return array
+     */
     public function actionSaveAdminAjax()
     {
         $post = \Yii::$app->request->post();
@@ -357,10 +366,10 @@ ETO;
 
         //修改失败
         if(!$res){
-            return array(
+            return json_encode(array(
                 'status' => $this->apiStatus['ERROR'],
                 'message' => '网络异常，修改失败',
-            );
+            ));
         }
 
         //修改成功
