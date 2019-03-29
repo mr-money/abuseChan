@@ -115,7 +115,7 @@ $this->registerCsrfMetaTags();
 //                console.log(data);return;
                 progress.done();//跳转进度结束
                 if(data.status == 1000){
-                    var url = "<?= \yii\helpers\Url::to(['wechat/index']); ?>";
+                    var url = "<?= \yii\helpers\Url::to(['admin/index']); ?>";
 
                     //点击确定立即跳转
                     myAlert('登录成功',false,function () {

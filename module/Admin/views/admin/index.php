@@ -47,7 +47,7 @@
     function logout() {
         myConfirm('确定退出吗',function () {
             $.post(
-                "<?= \yii\helpers\Url::to(['wechat/logout-ajax']); ?>",
+                "<?= \yii\helpers\Url::to(['admin/logout-ajax']); ?>",
                 {
 
                 },
