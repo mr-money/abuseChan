@@ -64,23 +64,12 @@ echo $this->render('../common/_layout');
                                         class="tpl-form-line-small-title">Images</span></label>
                             <div class="am-u-sm-9">
                                 <div class="am-form-group am-form-file">
-                                    <div class="tpl-form-file-img">
+                                    <div class="tpl-form-file-img" style="margin-bottom: 1%">
                                         <img src="<?= $admin['avatar'] ?>" alt="" id="avatarView" width="300">
                                     </div>
                                     <button type="button" class="am-btn am-btn-warning am-btn-sm" onclick="replaceImg()">
                                         <i class="am-icon-cloud-upload"></i> 上传头像
                                     </button>
-
-                                    <!--<input id="avatar" type="file" multiple="" name="avatar" onchange="fileSelectHandler('avatar','avatarView')">
-                                    <p class="error"><small>此头像仅能上传一次,如需修改,请刷新页面。如不想修改,你们特么来打我啊</small></p>
-
-                                    <input type="hidden" id="x1" name="x1"autocomplete="off" />
-                                    <input type="hidden" id="y1" name="y1" autocomplete="off"/>
-                                    <input type="hidden" id="x2" name="x2"autocomplete="off" />
-                                    <input type="hidden" id="y2" name="y2"autocomplete="off" />-->
-
-
-<!--                                    <input id="avatar" type="file" multiple="" name="avatar">-->
                                 </div>
 
                             </div>
@@ -100,7 +89,7 @@ echo $this->render('../common/_layout');
                             <label for="realname" class="am-u-sm-3 am-form-label">密码 <span
                                         class="tpl-form-line-small-title">password</span></label>
                             <div class="am-u-sm-9">
-                                <button type="button" class="am-btn am-btn-danger am-radius am-btn-block am-btn-sm" style="width: 12%">修改密码</button>
+                                <button type="button" class="am-btn am-btn-danger am-radius am-btn-block am-btn-sm" style="width: 12%" id="password">修改密码</button>
                                 <small>点击修改密码。</small>
                             </div>
                         </div>
@@ -154,49 +143,135 @@ echo $this->render('../common/_layout');
     </div>
 </div>
 <!--图片裁剪框 end-->
+
+<!-- 修改密码框 start -->
+<div class="am-modal am-modal-prompt" tabindex="-1" id="editPassword">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">骂骂酱提示您</div>
+        <div class="am-modal-bd">
+            正在修改密码哦
+<!--            <input type="text" class="am-modal-prompt-input" placeholder="请输入旧密码">-->
+<!--            <input type="text" class="am-modal-prompt-input" placeholder="请输入新密码">-->
+<!--            <input type="text" class="am-modal-prompt-input" placeholder="请重复新密码">-->
+            <form class="am-form editPasswordForm" style="margin-top: 2%">
+                <div class="am-input-group">
+                    <span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
+                    <input type="text" class="am-form-field am-modal-prompt-input" placeholder="请输入旧密码">
+                </div>
+
+                <div class="am-input-group" style="margin-top: 3%">
+                    <span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
+                    <input type="text" class="am-form-field am-modal-prompt-input" placeholder="请输入新密码">
+                </div>
+
+                <div class="am-input-group" style="margin-top: 3%">
+                    <span class="am-input-group-label"><i class="am-icon-lock am-icon-fw"></i></span>
+                    <input type="text" class="am-form-field am-modal-prompt-input" placeholder="请重复新密码">
+                </div>
+            </form>
+
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+        </div>
+    </div>
+</div>
+<!-- 修改密码框 end -->
+
 <?php $this->endBody() ?>
 
 <script>
-    $("#submit").click(function () {
-        const $this = $(this);
-        $this.attr('disabled',true);
-        var html = "<span class='am-icon-spinner am-icon-pulse'></span>&nbsp;&nbsp;正在保存...";
-        $this.html(html)
+    $(function() {
+        //修改密码弹框
+        $('#password').on('click', function() {
+            $(".am-modal-prompt-input").css("margin",'auto');
 
-        //跳转进度
-        var progress = parent.$.AMUI.progress;
-        progress.start();
+            $('#editPassword').modal({
+                relatedTarget: this,
+                onConfirm: function(e) {
+//                    alert('你输入的是：' + e.data || '')
+//                    console.log(e.data);
+                    console.log()
 
-        var form = new FormData($("#form")[0]); //实例化form表单
-        form.append('avatar', $("#avatarView").attr('src')); //添加文件
-
-        $.ajax({
-            url: "<?= yii\helpers\Url::to(['save-admin-ajax']) ?>",
-            type: "POST",
-            data: form,
-            dataType: "json",
-            processData:false,
-            contentType:false,
-            success: function (data) {
-//                console.log(data);
-                progress.done();//跳转进度结束
-                $this.attr('disabled',false);
-                $this.html('提交保存')
-                myAlert(data.message);
-
-                //成功修改 common/_navBar头像和昵称
-                if(data.status = 1000){
-                    window.parent.$("#admin-nickname").text(data.data.nickname);
-                    window.parent.$("#admin-avatar").attr('src',data.data.avatar);
-
+                },
+                onCancel: function(e) {
+                    return;
                 }
-
-                return;
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-            }
+            });
         });
-    })
+
+        //输入原密码弹窗失焦 查询密码是否正确
+        $(".editPasswordForm").find('input').eq(0).blur(function () {
+            var $this = $(this);
+            var password = hex_md5($this.val());
+
+            $this.prev().removeClass('am-icon-lock');
+            $this.prev().addClass('am-icon-times');
+
+            $.post(
+                "<?= \yii\helpers\Url::to(['admin/check-password-ajax']) ?>",
+                {
+                    password:password,
+                },
+                function(data){
+                    //密码
+                    if(data==1000) {
+
+                    }else{
+                        $this.prev().removeClass('am-icon-lock');
+//                        $this.prev().addClass('am-icon-times');
+                    }
+                },
+                "json"
+            );
+
+        })
+
+        //保存信息
+        $("#submit").click(function () {
+            const $this = $(this);
+            $this.attr('disabled',true);
+            var html = "<span class='am-icon-spinner am-icon-pulse'></span>&nbsp;&nbsp;正在保存...";
+            $this.html(html)
+
+            //跳转进度
+            var progress = parent.$.AMUI.progress;
+            progress.start();
+
+            var form = new FormData($("#form")[0]); //实例化form表单
+            form.append('avatar', $("#avatarView").attr('src')); //添加文件
+
+            $.ajax({
+                url: "<?= yii\helpers\Url::to(['save-admin-ajax']) ?>",
+                type: "POST",
+                data: form,
+                dataType: "json",
+                processData:false,
+                contentType:false,
+                success: function (data) {
+//                console.log(data);
+                    progress.done();//跳转进度结束
+                    $this.attr('disabled',false);
+                    $this.html('提交保存')
+                    myAlert(data.message);
+
+                    //成功修改 common/_navBar头像和昵称
+                    if(data.status = 1000){
+                        window.parent.$("#admin-nickname").text(data.data.nickname);
+                        window.parent.$("#admin-avatar").attr('src',data.data.avatar);
+
+                    }
+
+                    return;
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        });
+    });
+
+
 </script>
 
 <?php $this->endPage() ?>

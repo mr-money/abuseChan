@@ -47,7 +47,7 @@ class AppAsset extends AssetBundle
         'AmazeUI/js/fullcalendar.min.js',
 
 
-//        'js/md5.js', //js md5加密
+        'js/md5.js', //js md5加密
         'js/admin.index.js', //admin页面js
     ];
 

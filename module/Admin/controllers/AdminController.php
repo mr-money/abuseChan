@@ -378,11 +378,41 @@ ETO;
             'message' => '修改成功',
         );
 
-        //session更新 
+        //session更新
         $admin = AdminUser::find($where)->asArray()->one();
         $this->sessionGlobal->set('admin',$admin);
 
         $response['data'] = $admin;
         return json_encode($response);
+    }
+
+    /**
+     * 检查密码是否正确
+     * @return string
+     */
+    public function actionCheckPasswordAjax()
+    {
+        $password = \Yii::$app->request->post('password');
+
+        //通过session查询用户
+        $adminId = $this->sessionGlobal->get('admin')['id'];
+        $where['id'] = $adminId;
+
+        $admin = AdminUser::find($where)->asArray()->one();
+
+        if($admin['password'] == $password){
+            $response['code'] = $this->apiStatus['SUCCESS'];
+        }else{
+            $response['code'] = $this->apiStatus['ERROR'];
+        }
+        return json_encode($response);
+    }
+
+    /**
+     * 修改网站首页页面
+     */
+    public function actionEditHomepage()
+    {
+        return $this->render('editHomepage');
     }
 }

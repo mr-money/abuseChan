@@ -10,7 +10,7 @@
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
               <?= $admin['nickname']; ?>
           </span>
-            <a href="javascript:navRedirect('<?= $admin['nickname']; ?>账号设置','<?= \yii\helpers\Url::to(['wechat/admin-user']); ?>');;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
+            <a href="javascript:navRedirect('<?= $admin['nickname']; ?>账号设置','<?= \yii\helpers\Url::to(['admin/admin-user']); ?>');;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
         </div>
     </div>
 

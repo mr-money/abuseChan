@@ -3,8 +3,6 @@
 use app\assets\AppAsset;
 
 AppAsset::register($this);
-AppAsset::addJs($this, Yii::$app->request->baseUrl . "/js/md5.js");
-//AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/b.css");
 
 $this->beginPage();
 

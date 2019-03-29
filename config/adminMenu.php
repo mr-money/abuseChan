@@ -6,15 +6,15 @@ return array(
             'navInfo' => '附加组件',
             'navLink' => array(
                 array(
-                    'name' => '主页概览',
+                    'name' => '骂骂酱',
                     'url' => "admin/home",
                     'logo' => "am-icon-home sidebar-nav-link-logo",
                     'navChild' => array(),
                 ),
                 array(
                     'name' => '网站主页',
-                    'url' => "admin/home",
-                    'logo' => "am-icon-home sidebar-nav-link-logo",
+                    'url' => "admin/edit-homepage",
+                    'logo' => "am-icon-edit sidebar-nav-link-logo",
                     'navChild' => array(),
                 ),
                 array(
