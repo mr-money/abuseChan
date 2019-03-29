@@ -4,7 +4,7 @@ namespace app\module\Admin\controllers;
 
 use app\models\AdminUser;
 
-class WechatController extends CommonController
+class AdminController extends CommonController
 {
     public function init()
     {
@@ -378,7 +378,7 @@ ETO;
             'message' => '修改成功',
         );
 
-        //session更新
+        //session更新 
         $admin = AdminUser::find($where)->asArray()->one();
         $this->sessionGlobal->set('admin',$admin);
 

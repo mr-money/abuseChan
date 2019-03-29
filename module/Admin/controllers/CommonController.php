@@ -4,8 +4,9 @@ namespace app\module\Admin\controllers;
 
 
 use app\models\AdminUser;
+use yii\web\Controller;
 
-class CommonController extends \yii\web\Controller
+class CommonController extends Controller
 {
     public $layout = false; //不使用默认布局
 

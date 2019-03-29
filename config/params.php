@@ -15,14 +15,20 @@ return [
             'navInfo' => '附加组件',
             'navLink' => array(
                 array(
-                    'name' => '首页',
-                    'url' => "wechat/home",
+                    'name' => '主页概览',
+                    'url' => "admin/home",
                     'logo' => "am-icon-home sidebar-nav-link-logo",
                     'navChild' => array(),
                 ),
                 array(
-                    'name' => '微信菜单编辑',
-                    'url' => "wechat/menu",
+                    'name' => '网站主页',
+                    'url' => "admin/home",
+                    'logo' => "am-icon-home sidebar-nav-link-logo",
+                    'navChild' => array(),
+                ),
+                array(
+                    'name' => '微信菜单',
+                    'url' => "admin/menu",
                     'logo' => "am-icon-weixin sidebar-nav-link-logo",
                     'navChild' => array(),
                 ),

@@ -22,7 +22,7 @@
 
             <div class="am-tabs-bd">
                 <div class="am-tab-panel am-active">
-                    <iframe src="<?= \yii\helpers\Url::to(['wechat/home']); ?>" id="admin-index-content-iframe" frameborder="0"></iframe>
+                    <iframe src="<?= \yii\helpers\Url::to(['admin/home']); ?>" id="admin-index-content-iframe" frameborder="0"></iframe>
                 </div>
 
             </div>
