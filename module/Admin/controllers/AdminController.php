@@ -388,7 +388,10 @@ ETO;
 
     /**
      * 检查密码是否正确
-     * @return string
+     * @param string(md5) password
+     * @return json
+     * code=SUCCESS(1000) 成功
+     * code=ERROR(9999) 成功
      */
     public function actionCheckPasswordAjax()
     {
@@ -408,6 +411,44 @@ ETO;
         return json_encode($response);
     }
 
+
+    /**
+     * 修改密码ajax
+     * @param string(md5) password
+     * @return json
+     * code=SUCCESS(1000) 成功
+     * code=ERROR(9999) 成功
+     * message string
+     */
+    public function actionEditPasswordAjax()
+    {
+        $password = \Yii::$app->request->post('password');
+
+        //通过session admin id 修改用户
+        $adminId = $this->sessionGlobal->get('admin')['id'];
+        $where['id'] = $adminId;
+
+        $data['password'] = $password;
+
+        $res = AdminUser::updateAll($data,$where);
+
+        //修改失败
+        if(!$res){
+            return json_encode(array(
+                'status' => $this->apiStatus['ERROR'],
+                'message' => '网络异常，修改失败',
+            ));
+        }
+
+        //修改成功
+        $response = array(
+            'status' => $this->apiStatus['SUCCESS'],
+            'message' => '修改成功',
+        );
+
+        return json_encode($response);
+    }
+    
     /**
      * 修改网站首页页面
      */
