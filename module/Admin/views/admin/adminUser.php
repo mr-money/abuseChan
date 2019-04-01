@@ -205,18 +205,17 @@ echo $this->render('../common/_layout');
                     console.log(e.data);
 
                     if(!passFlag){
-                        alert('原密码错误');
-//                        myAlert('原密码错误');
+                        myAlert('原密码错误');
                         return;
                     }
                     var newpassword1 = e.data[1];
                     var newpassword2 = e.data[2];
 
                     if(newpassword1 == '' || newpassword2 == ''){
-                        alert('密码不能为空')
+                        myAlert('密码不能为空')
                         return;
                     }else if(newpassword1 != newpassword2){
-                        alert('两次输入密码不一致')
+                        myAlert('两次输入密码不一致')
                         return;
                     }else{
                         if(passFlag){
