@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     var tabCounter = 0;
     var $tab = $('#admin-doc-tab');
     var $nav = $tab.find('.am-tabs-nav');
@@ -17,12 +17,12 @@ $(function() {
     }
 
     // 动态添加标签页
-    $('.js-append-tab').on('click', function() {
+    $('.js-append-tab').on('click', function () {
         addTab();
     });
 
     // 移除标签页
-    $nav.on('click', '.am-icon-close', function() {
+    $nav.on('click', '.am-icon-close', function () {
         var $item = $(this).closest('li');
         var index = $nav.children('li').index($item);
 
@@ -43,79 +43,66 @@ $(function() {
  * @param title = false
  * @param func = function
  */
-function myAlert(message, title,func) {
-    //title默认值
-    title = title ? title : '骂骂酱提示你';
-
-    //该message模态框是否存在
-    var haveMessage = $('.amazeui-am-modal-alert').children('.am-modal-dialog').children('.message').text();
-
-    if (haveMessage == '') {
-        var randnum = Math.floor(Math.random() * (9999 - 0)) + 0; //4位随机数
-
-        var html = "<div class='am-modal am-modal-alert amazeui-am-modal-alert' tabindex='-1' id='amazeui-modal-my-alert" + randnum + "'> " +
-            "<div class='am-modal-dialog'> " +
-            "<div class='am-modal-hd'>" + title + "</div> " +
-            "<div class='am-modal-bd message'>" + message + "</div> " +
-            "<div class='am-modal-footer'> " +
-            "<span class='am-modal-btn'>确定</span> " +
-            "</div> " +
-            "</div>" +
-            "</div>";
-
-        $("body").append(html);
-        var modalId = "amazeui-modal-my-alert" + randnum;
-    } else {
-        var modalId = $('.amazeui-am-modal-alert').attr('id');
-    }
-
-    $("#" + modalId).find(".am-modal-btn").click(func)
-
-    $("#" + modalId).modal('open');
-
-}
-
-/*
- * 使用modal模拟confirm
- * option 点击确定后的function
- * */
-function myConfirm(message, option, title) {
+function myAlert(message, title, func) {
     //title默认值
     title = typeof title !== 'undefined' ? title : '骂骂酱问你';
 
-    //该message模态框是否存在
-    var haveMessage = $('.amazeui-am-modal-confirm').children('.am-modal-dialog').children('.message').text();
-    console.log(haveMessage);
-    if (haveMessage == '') {
+    //清空容器
+    $("#amazeui-modal-my-alert").remove();
 
-        var randnum = Math.floor(Math.random() * (9999 - 0)) + 0; //4位随机数
+    var html = "<div class='am-modal am-modal-alert amazeui-am-modal-alert' tabindex='-1' id='amazeui-modal-my-alert'> " +
+        "<div class='am-modal-dialog'> " +
+        "<div class='am-modal-hd'>" + title + "</div> " +
+        "<div class='am-modal-bd my-alert-message'>" + message + "</div> " +
+        "<div class='am-modal-footer'> " +
+        "<span class='am-modal-btn'>确定</span> " +
+        "</div> " +
+        "</div>" +
+        "</div>";
 
-        var html = "<div class='am-modal am-modal-confirm amazeui-am-modal-confirm' tabindex='-1' id='amazeui-modal-my-confirm" + randnum + "'> " +
-            "<div class='am-modal-dialog'> " +
-            "<div class='am-modal-hd'>" + title + "</div> " +
-            "<div class='am-modal-bd message'>" + message + "</div> " +
-            "<div class='am-modal-footer'> " +
-            "<span class='am-modal-btn' data-am-modal-confirm>确定</span> " +
-            "<span class='am-modal-btn' data-am-modal-cancel>取消</span> " +
-            "</div> " +
-            "</div> " +
-            "</div>";
+    $("body").append(html);
+    $("#amazeui-modal-my-alert").find(".am-modal-btn").click(func)
 
-        $("body").append(html);
+    $("#amazeui-modal-my-alert").modal('open');
 
-        $("#amazeui-modal-my-confirm" + randnum).modal({
-            relatedTarget: this,
-            onConfirm: option,
-            // closeOnConfirm: false,
-            onCancel: function () {
-                // alert('算求，不弄了');
-            }
-        });
-    } else {
-        var modalId = $('.amazeui-am-modal-confirm').attr('id');
+}
 
-        $("#" + modalId).modal();
-    }
+/**
+ * 使用modal模拟confirm
+ * @param message
+ * @param onConfirm 点击确定后的function
+ * @param onCancel 点击取消后的function
+ * @param title
+ */
+function myConfirm(message, onConfirm, onCancel, title) {
+    //title默认值
+    title = typeof title !== 'undefined' ? title : '骂骂酱问你';
+
+    //清空容器
+    $("#amazeui-modal-my-confirm").remove();
+
+    var html = "<div class='am-modal am-modal-confirm amazeui-am-modal-confirm' tabindex='-1' id='amazeui-modal-my-confirm'> " +
+        "<div class='am-modal-dialog'> " +
+        "<div class='am-modal-hd'>" + title + "</div> " +
+        "<div class='am-modal-bd message'>" + message + "</div> " +
+        "<div class='am-modal-footer'> " +
+        "<span class='am-modal-btn' data-am-modal-confirm>确定</span> " +
+        "<span class='am-modal-btn' data-am-modal-cancel>取消</span> " +
+        "</div> " +
+        "</div> " +
+        "</div>";
+
+    $("body").append(html);
+
+    $("#amazeui-modal-my-confirm").modal({
+        relatedTarget: this,
+        onConfirm: onConfirm,
+        // closeOnConfirm: false,
+        onCancel: onCancel
+    });
+
+    $("#amazeui-modal-my-confirm").modal('open');
+
 }
 
 //点击外部链接 新建跳转iframe
@@ -141,7 +128,7 @@ function iframeRedirect(title, url) {
     $tab.tabs('refresh');
     var index = $nav.children('li').length;
 
-    $tab.tabs('open', index-1);
+    $tab.tabs('open', index - 1);
     $tab.tabs('refresh');
 
     var iframes = document.getElementsByTagName('iframe');
