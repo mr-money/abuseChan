@@ -76,7 +76,7 @@ function myAlert(message, title, func) {
  */
 function myConfirm(message, onConfirm, onCancel, title) {
     //title默认值
-    title = typeof title !== 'undefined' ? title : '骂骂酱问你';
+    title = typeof title !== 'undefined' ? title : '骂骂酱提示你';
 
     //清空容器
     $("#amazeui-modal-my-confirm").remove();
