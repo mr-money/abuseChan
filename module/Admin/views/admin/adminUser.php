@@ -1,11 +1,13 @@
 <?php
 echo $this->render('../common/_layout');
 
-\app\assets\AppAsset::addJs($this, Yii::$app->request->baseUrl . "/cropper/js/cropper.min.js");
-\app\assets\AppAsset::addJs($this, Yii::$app->request->baseUrl . "/cropper/js/script.js");
+use app\assets\AppAsset;
 
-\app\assets\AppAsset::addCss($this, Yii::$app->request->baseUrl . "/cropper/css/ImgCropping.css");
-\app\assets\AppAsset::addCss($this, Yii::$app->request->baseUrl . "/cropper/css/cropper.min.css");
+AppAsset::addJs($this, Yii::$app->request->baseUrl . "/cropper/js/cropper.min.js");
+AppAsset::addJs($this, Yii::$app->request->baseUrl . "/cropper/js/script.js");
+
+AppAsset::addCss($this, Yii::$app->request->baseUrl . "/cropper/css/ImgCropping.css");
+AppAsset::addCss($this, Yii::$app->request->baseUrl . "/cropper/css/cropper.min.css");
 ?>
 
 <?php $this->beginBody(); ?>
@@ -208,6 +210,7 @@ echo $this->render('../common/_layout');
                         myAlert('原密码错误');
                         return;
                     }
+
                     var newpassword1 = e.data[1];
                     var newpassword2 = e.data[2];
 
@@ -311,6 +314,8 @@ echo $this->render('../common/_layout');
                     $this.attr('disabled', false);
                     $this.html('提交保存')
                     myAlert(data.message);
+
+
 
                     //成功修改 common/_navBar头像和昵称
                     if (data.status = 1000) {
