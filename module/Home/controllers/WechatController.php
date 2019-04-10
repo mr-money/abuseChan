@@ -224,7 +224,9 @@ class WechatController extends Controller
                 ],
         ];
 
-//        var_dump($buttons);
-        $app->menu->create($buttons);
+        var_dump($buttons);
+        $res = $app->menu->create($buttons);
+
+        var_dump($res);
     }
 }
