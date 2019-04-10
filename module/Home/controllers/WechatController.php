@@ -3,6 +3,7 @@
 namespace app\module\Home\controllers;
 
 use app\models\WxUser;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 class WechatController extends Controller
@@ -209,4 +210,21 @@ class WechatController extends Controller
         return '取消关注';
     }
 
+
+    /**
+     * 添加菜单
+     */
+    public  function  actionAddmenu(){
+        $app = \Yii::$app->wechat->app;
+        $buttons = [
+                [
+                    "type" => "view",
+                    "name" => "俄罗斯方块",
+                    "url"  => \Yii::$app->urlManager->createAbsoluteUrl('Home/game/tetris')
+                ],
+        ];
+
+//        var_dump($buttons);
+        $app->menu->create($buttons);
+    }
 }
