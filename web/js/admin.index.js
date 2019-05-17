@@ -45,7 +45,7 @@ $(function () {
  */
 function myAlert(message, title, func) {
     //title默认值
-    title = typeof title !== 'undefined' ? title : '骂骂酱问你';
+    title = title ? title : '骂骂酱问你';
 
     //清空容器
     $("#amazeui-modal-my-alert").remove();
@@ -74,9 +74,9 @@ function myAlert(message, title, func) {
  * @param onCancel 点击取消后的function
  * @param title
  */
-function myConfirm(message, onConfirm, onCancel, title) {
+function myConfirm(message, title, onConfirm, onCancel) {
     //title默认值
-    title = typeof title !== 'undefined' ? title : '骂骂酱提示你';
+    title = title ? title : '骂骂酱提示你';
 
     //清空容器
     $("#amazeui-modal-my-confirm").remove();

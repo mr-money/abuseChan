@@ -95,18 +95,18 @@ class AdminController extends CommonController
 //        $time_info = trim(" 16 days,  1:34");
         $time_info = trim(" 6 min");
 //        $time_info = trim(" 1:34");
-        if($day = trim(strstr($time_info,'days,',true),'days,')){
-            $timeStr = trim(trim(strstr($time_info,'days,'),'days,'));
-            $time = explode(':',$timeStr);
-        }else if($minue = trim(strstr($time_info,'min',true),'min')){
+        if ($day = trim(strstr($time_info, 'days,', true), 'days,')) {
+            $timeStr = trim(trim(strstr($time_info, 'days,'), 'days,'));
+            $time = explode(':', $timeStr);
+        } else if ($minue = trim(strstr($time_info, 'min', true), 'min')) {
             $day = 0;
-            $time = array(0,$minue);
-        }else{
+            $time = array(0, $minue);
+        } else {
             $day = 0;
-            $time = explode(':',$time_info);
+            $time = explode(':', $time_info);
         }
 
-        $uptime = (intval($day)*24*60*60)+(intval($time[0])*60*60)+(intval($time[1])*60);
+        $uptime = (intval($day) * 24 * 60 * 60) + (intval($time[0]) * 60 * 60) + (intval($time[1]) * 60);
 
         \app\controllers\CommonController::dump($uptime);
     }
@@ -230,43 +230,43 @@ ETO;
             pclose($fp);
             $sys_info = explode("\n", $rs); //系统信息
 
-            $top_info = explode(",",$sys_info[3]); //系统运行时间 数组
+            $top_info = explode(",", $sys_info[3]); //系统运行时间 数组
             $cpu_info = explode(",", $sys_info[4]);  //CPU占有量  数组
             $mem_info = explode(",", $sys_info[5]); //内存占有量 数组
 
             //系统运行时间
-            $time_info = trim(trim(strstr($top_info[0],'up'),'up'));
+            $time_info = trim(trim(strstr($top_info[0], 'up'), 'up'));
 
             //test
 //            $top_info[0] = 'top - 17:00:46 up 7 days';
 //            $top_info[1] = '  49';
 
             //运行时间超过1天
-            if($day = trim(strstr($time_info,'days',true),'days')){
-                $time = explode(':',trim($top_info[1]));
+            if ($day = trim(strstr($time_info, 'days', true), 'days')) {
+                $time = explode(':', trim($top_info[1]));
 
                 //超过一天，不到一小时
-                if(count($time) == 1){
-                    $time = array(0,$time[0]);
+                if (count($time) == 1) {
+                    $time = array(0, $time[0]);
                 }
 
                 //运行时间不到1小时
-            }else if($minue = trim(strstr($time_info,'min',true),'min')){
+            } else if ($minue = trim(strstr($time_info, 'min', true), 'min')) {
                 $day = 0;
-                $time = array(0,$minue);
+                $time = array(0, $minue);
 
                 //运行时间在1小时到1天之间
-            }else{
+            } else {
                 $day = 0;
-                $time = explode(':',$time_info);
+                $time = explode(':', $time_info);
 
                 //不到一小时
-                if(count($time) == 1){
-                    $time = array(0,$time[0]);
+                if (count($time) == 1) {
+                    $time = array(0, $time[0]);
                 }
             }
 
-            $uptime = (floatval($day)*24*60*60)+(floatval($time[0])*60*60)+(floatval($time[1])*60);
+            $uptime = (floatval($day) * 24 * 60 * 60) + (floatval($time[0]) * 60 * 60) + (floatval($time[1]) * 60);
 
             $server['time'] = array(
                 'uptime' => $uptime,
@@ -359,13 +359,13 @@ ETO;
             'realname' => htmlspecialchars($post['realname']),
             'avatar' => $post['avatar'], // 头像 base64
             'backup' => htmlspecialchars($post['backup']),
-            'updated_at' => date("Y-m-d H:i:s",time()),
+            'updated_at' => date("Y-m-d H:i:s", time()),
         );
 
-        $res = AdminUser::updateAll($data,$where);
+        $res = AdminUser::updateAll($data, $where);
 
         //修改失败
-        if(!$res){
+        if (!$res) {
             return json_encode(array(
                 'status' => $this->apiStatus['ERROR'],
                 'message' => '网络异常，修改失败',
@@ -380,7 +380,7 @@ ETO;
 
         //session更新
         $admin = AdminUser::find($where)->asArray()->one();
-        $this->sessionGlobal->set('admin',$admin);
+        $this->sessionGlobal->set('admin', $admin);
 
         $response['data'] = $admin;
         return json_encode($response);
@@ -403,9 +403,9 @@ ETO;
 
         $admin = AdminUser::find($where)->asArray()->one();
 
-        if($admin['password'] == $password){
+        if ($admin['password'] == $password) {
             $response['code'] = $this->apiStatus['SUCCESS'];
-        }else{
+        } else {
             $response['code'] = $this->apiStatus['ERROR'];
         }
         return json_encode($response);
@@ -430,10 +430,10 @@ ETO;
 
         $data['password'] = $password;
 
-        $res = AdminUser::updateAll($data,$where);
+        $res = AdminUser::updateAll($data, $where);
 
         //修改失败
-        if(!$res){
+        if (!$res) {
             return json_encode(array(
                 'status' => $this->apiStatus['ERROR'],
                 'message' => '网络异常，修改失败',
@@ -448,12 +448,16 @@ ETO;
 
         return json_encode($response);
     }
-    
+
     /**
      * 修改网站首页页面
      */
     public function actionEditHomepage()
     {
-        return $this->render('editHomepage');
+        $a = $b = 123123;
+        echo $a;
+        echo '<br>';
+        echo $b;
+//        return $this->render('editHomepage');
     }
 }
