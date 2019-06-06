@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home</title>
+    <title>骂骂酱(中国)官方网站</title>
     <link href="<?= Yii::getAlias('@web'); ?>/homeindex/css/font-awesome.min.css" rel="stylesheet" type="text/css"
           media="all"/><!-- fontawesome -->
     <link href="<?= Yii::getAlias('@web'); ?>/homeindex/css/bootstrap.css" rel="stylesheet" type="text/css"
@@ -302,7 +302,7 @@
                 <div class="w3l_gallery_grids1">
                     <div class="col-md-4 w3l_gallery_grid">
                         <div class="agileinfo_gallery_grid">
-                            <a class="group1" href="images/g1.jpg" title="Road trip">
+                            <a class="group1" href="<?= Yii::getAlias('@web'); ?>/homeindex/images/g1.jpg" title="Road trip">
                                 <div class="hovereffect">
                                     <img src="<?= Yii::getAlias('@web'); ?>/homeindex/images/g1.jpg" alt=" "
                                          class="img-responsive"/>
@@ -315,7 +315,7 @@
                     </div>
                     <div class="col-md-4 w3l_gallery_grid">
                         <div class="agileinfo_gallery_grid">
-                            <a class="group1" href="images/g2.jpg" title="Road trip">
+                            <a class="group1" href="<?= Yii::getAlias('@web'); ?>/homeindex/images/g2.jpg" title="Road trip">
                                 <div class="hovereffect">
                                     <img src="<?= Yii::getAlias('@web'); ?>/homeindex/images/g2.jpg" alt=" "
                                          class="img-responsive"/>
@@ -328,7 +328,7 @@
                     </div>
                     <div class="col-md-4 w3l_gallery_grid">
                         <div class="agileinfo_gallery_grid">
-                            <a class="group1" href="images/g3.jpg" title="Road trip">
+                            <a class="group1" href="<?= Yii::getAlias('@web'); ?>/homeindex/images/g3.jpg" title="Road trip">
                                 <div class="hovereffect">
                                     <img src="<?= Yii::getAlias('@web'); ?>/homeindex/images/g3.jpg" alt=" "
                                          class="img-responsive"/>
@@ -341,7 +341,7 @@
                     </div>
                     <div class="col-md-4 w3l_gallery_grid">
                         <div class="agileinfo_gallery_grid">
-                            <a class="group1" href="images/g4.jpg" title="Road trip">
+                            <a class="group1" href="<?= Yii::getAlias('@web'); ?>/homeindex/images/g4.jpg" title="Road trip">
                                 <div class="hovereffect">
                                     <img src="<?= Yii::getAlias('@web'); ?>/homeindex/images/g4.jpg" alt=" "
                                          class="img-responsive"/>
@@ -354,7 +354,7 @@
                     </div>
                     <div class="col-md-4 w3l_gallery_grid">
                         <div class="agileinfo_gallery_grid">
-                            <a class="group1" href="images/g5.jpg" title="Road trip">
+                            <a class="group1" href="<?= Yii::getAlias('@web'); ?>/homeindex/images/g5.jpg" title="Road trip">
                                 <div class="hovereffect">
                                     <img src="<?= Yii::getAlias('@web'); ?>/homeindex/images/g5.jpg" alt=" "
                                          class="img-responsive"/>
@@ -367,7 +367,7 @@
                     </div>
                     <div class="col-md-4 w3l_gallery_grid">
                         <div class="agileinfo_gallery_grid">
-                            <a class="group1" href="images/g6.jpg" title="Road trip">
+                            <a class="group1" href="<?= Yii::getAlias('@web'); ?>/homeindex/images/g6.jpg" title="Road trip">
                                 <div class="hovereffect">
                                     <img src="<?= Yii::getAlias('@web'); ?>/homeindex/images/g6.jpg" alt=" "
                                          class="img-responsive"/>
@@ -380,7 +380,7 @@
                     </div>
                     <div class="col-md-4 w3l_gallery_grid">
                         <div class="agileinfo_gallery_grid">
-                            <a class="group1" href="images/g7.jpg" title="Road trip">
+                            <a class="group1" href="<?= Yii::getAlias('@web'); ?>/homeindex/images/g7.jpg" title="Road trip">
                                 <div class="hovereffect">
                                     <img src="<?= Yii::getAlias('@web'); ?>/homeindex/images/g7.jpg" alt=" "
                                          class="img-responsive"/>
@@ -393,7 +393,7 @@
                     </div>
                     <div class="col-md-4 w3l_gallery_grid">
                         <div class="agileinfo_gallery_grid">
-                            <a class="group1" href="images/g8.jpg" title="Road trip">
+                            <a class="group1" href="<?= Yii::getAlias('@web'); ?>/homeindex/images/g8.jpg" title="Road trip">
                                 <div class="hovereffect">
                                     <img src="<?= Yii::getAlias('@web'); ?>/homeindex/images/g8.jpg" alt=" "
                                          class="img-responsive"/>
@@ -406,7 +406,7 @@
                     </div>
                     <div class="col-md-4 w3l_gallery_grid">
                         <div class="agileinfo_gallery_grid">
-                            <a class="group1" href="images/g9.jpg" title="Road trip">
+                            <a class="group1" href="<?= Yii::getAlias('@web'); ?>/homeindex/images/g9.jpg" title="Road trip">
                                 <div class="hovereffect">
                                     <img src="<?= Yii::getAlias('@web'); ?>/homeindex/images/g9.jpg" alt=" "
                                          class="img-responsive"/>

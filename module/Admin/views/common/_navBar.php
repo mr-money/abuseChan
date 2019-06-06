@@ -21,7 +21,7 @@
 
             <?php foreach ($menu['navLink'] as $navLink){ ?>
                 <li class="sidebar-nav-link">
-                    <a href="javascript:navRedirect('<?= $navLink['name'] ?>','<?= \yii\helpers\Url::to([$navLink['url']]); ?>');" class="sidebar-nav-sub-title">
+                    <a href="javascript:navRedirect('<?= $navLink['name'] ?>','<?php $navLink['url']?\yii\helpers\Url::to([$navLink['url']]):'';  ?>');" class="sidebar-nav-sub-title">
                         <i class="<?= $navLink['logo'] ?>"></i>
                         <?= $navLink['name'] ?>
     <!--                    <span class="am-badge am-badge-secondary sidebar-nav-link-logo-ico am-round am-fr am-margin-right-sm">数字气泡4</span>-->

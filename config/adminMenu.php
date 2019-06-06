@@ -24,9 +24,9 @@ return array(
                     'navChild' => array(),
                 ),
                 array(
-                    'name' => '表格',
-                    'url' => "",
-                    'logo' => "am-icon-table sidebar-nav-link-logo",
+                    'name' => '用户列表',
+                    'url' => "wechat/user-list",
+                    'logo' => "am-icon-user sidebar-nav-link-logo",
                     'navChild' => array(),
                 ),
                 array(

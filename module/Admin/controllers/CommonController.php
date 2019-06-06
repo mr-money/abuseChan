@@ -66,4 +66,22 @@ class CommonController extends Controller
         }
         return $format_time;
     }
+
+    /**
+     * @param string $status ajax返回状态
+     * @param string $message 提示
+     * @param array $data 数据
+     * @return json false|string
+     */
+    public function ajaxReturn($status='SUCCESS',$message='成功',$data=[])
+    {
+        $response = array(
+            'status' => $this->apiStatus[$status],
+            'message' => $message,
+            'data' => $data,
+        );
+
+        return json_encode($response);
+    }
+
 }

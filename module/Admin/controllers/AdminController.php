@@ -454,10 +454,6 @@ ETO;
      */
     public function actionEditHomepage()
     {
-        $a = $b = 123123;
-        echo $a;
-        echo '<br>';
-        echo $b;
-//        return $this->render('editHomepage');
+        return $this->render('editHomepage');
     }
 }
