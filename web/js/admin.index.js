@@ -45,7 +45,7 @@ $(function () {
  */
 function myAlert(message, title, func) {
     //title默认值
-    title = title ? title : '骂骂酱问你';
+    title = title ? title : '骂骂酱提示你';
 
     //清空容器
     $("#amazeui-modal-my-alert").remove();
@@ -76,7 +76,7 @@ function myAlert(message, title, func) {
  */
 function myConfirm(message, title, onConfirm, onCancel) {
     //title默认值
-    title = title ? title : '骂骂酱提示你';
+    title = title ? title : '骂骂酱问你';
 
     //清空容器
     $("#amazeui-modal-my-confirm").remove();

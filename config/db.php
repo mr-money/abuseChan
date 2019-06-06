@@ -6,7 +6,7 @@ return [
     'username' => 'root',
     'password' => 'root',
     'charset' => 'utf8',
-    'tablePrefix' => 'abuse_',   //加入前缀名称fc_
+    'tablePrefix' => 'abuse_',   //加入前缀名称
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,
