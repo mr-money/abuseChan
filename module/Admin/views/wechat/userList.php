@@ -1,6 +1,7 @@
 <?php
 echo $this->render('../common/_layout');
-$this->registerCsrfMetaTags();
+use yii\widgets\LinkPager;
+
 ?>
 
 <?php $this->beginBody(); ?>
@@ -68,7 +69,7 @@ $this->registerCsrfMetaTags();
                                     <tr class="">
                                         <td class="am-text-middle"><?= $list['id'] ?></td>
                                         <td>
-                                            <img src="<?= $list['avatar'] ?>" class="tpl-table-line-img" alt="">
+                                            <img src="<?= $list['avatar'] ?>" class="tpl-table-line-img" alt="" width="50">
                                         </td>
                                         <td class="am-text-middle"><?= $list['nickname'] ?></td>
                                         <td class="am-text-middle"><?= $list['tel'] ?></td>
@@ -76,9 +77,9 @@ $this->registerCsrfMetaTags();
                                         <td class="am-text-middle"><?= $list['create_at'] ?></td>
                                         <td class="am-text-middle">
                                             <div class="tpl-table-black-operation">
-                                                <a href="javascript:;">
+                                                <!--<a href="javascript:;">
                                                     <i class="am-icon-pencil"></i> 编辑
-                                                </a>
+                                                </a>-->
                                                 <a href="javascript:delUser('<?= $list['id']; ?>');"
                                                    class="tpl-table-black-operation-del">
                                                     <i class="am-icon-trash"></i> 删除
@@ -91,10 +92,21 @@ $this->registerCsrfMetaTags();
                                 </tbody>
                             </table>
                         </div>
-                        <div class="am-u-lg-12 am-cf">
 
+
+
+                        <div class="am-u-lg-12 am-cf">
                             <div class="am-fr">
-                                <ul class="am-pagination tpl-pagination">
+                                <?php
+                                echo  LinkPager::widget([
+                                        'pagination' => $page,
+                                        'nextPageLabel' => '下一页',
+                                        'prevPageLabel' => '上一页',
+                                        'maxButtonCount' => 5, //页码数
+                                ]);
+                                ?>
+
+                                <!--<ul class="am-pagination tpl-pagination">
                                     <li class="am-disabled"><a href="#">«</a></li>
                                     <li class="am-active"><a href="#">1</a></li>
                                     <li><a href="#">2</a></li>
@@ -102,9 +114,11 @@ $this->registerCsrfMetaTags();
                                     <li><a href="#">4</a></li>
                                     <li><a href="#">5</a></li>
                                     <li><a href="#">»</a></li>
-                                </ul>
+                                </ul>-->
+
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
