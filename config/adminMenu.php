@@ -29,6 +29,12 @@ return array(
                     'logo' => "am-icon-user sidebar-nav-link-logo",
                     'navChild' => array(),
                 ),
+		array(
+                    'name' => '编辑页面',
+                    'url' => "wechat/editpage",
+                    'logo' => "am-icon-edit sidebar-nav-link-logo",
+                    'navChild' => array(),
+                ),
                 array(
                     'name' => '表单',
                     'url' => "",

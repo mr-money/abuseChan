@@ -73,4 +73,26 @@ class WechatController extends CommonController
 
         return $response;
     }
+
+    /*
+     * 编辑页面
+     * */
+    public function actionEditpage()
+    {
+        return $this->render('editpage');
+    }
+
+    /**
+     * @return json
+     */
+    public function actionEditpageAjax()
+    {
+        $post = \Yii::$app->request->post();
+        return json_encode($post);
+//        return json_encode($_FILES);
+
+
+
+//        return $this->ajaxReturn('SUCCESS','',$post);
+    }
 }
