@@ -10,7 +10,7 @@
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
               <?= $admin['nickname']; ?>
           </span>
-            <a href="javascript:navRedirect('<?= $admin['nickname']; ?>账号设置','<?= \yii\helpers\Url::to(['admin/admin-user']); ?>');;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
+            <a href="javascript:navRedirect('<?= $admin['nickname']; ?>账号设置','<?= yii\helpers\Url::to(['admin/admin-user']); ?>');;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
         </div>
     </div>
 
@@ -21,7 +21,7 @@
 
             <?php foreach ($menu['navLink'] as $navLink){ ?>
                 <li class="sidebar-nav-link">
-                    <a href="javascript:navRedirect('<?= $navLink['name'] ?>','<?= $navLink['url']?\yii\helpers\Url::to([$navLink['url']]):'';  ?>');" class="sidebar-nav-sub-title">
+                    <a href="javascript:navRedirect('<?= $navLink['name'] ?>','<?= $navLink['url']?yii\helpers\Url::to([$navLink['url']]):'';  ?>');" class="sidebar-nav-sub-title">
                         <i class="<?= $navLink['logo'] ?>"></i>
                         <?= $navLink['name'] ?>
     <!--                    <span class="am-badge am-badge-secondary sidebar-nav-link-logo-ico am-round am-fr am-margin-right-sm">数字气泡4</span>-->
@@ -35,7 +35,7 @@
                         <ul class="sidebar-nav sidebar-nav-sub">
                         <?php foreach ($navLink['navChild'] as $navChild){ ?>
                             <li class="sidebar-nav-link">
-                                <a href="javascript:navRedirect('<?= $navChild['name'] ?>','<?= \yii\helpers\Url::to([$navChild['url']]); ?>');">
+                                <a href="javascript:navRedirect('<?= $navChild['name'] ?>','<?= yii\helpers\Url::to([$navChild['url']]); ?>');">
                                     <span class="<?= $navChild['logo'] ?>"></span>
                                     <?= $navChild['name'] ?>
                                 </a>

@@ -135,7 +135,7 @@ use yii\widgets\LinkPager;
                 var progress = $.AMUI.progress;
                 progress.start();
                 $.post(
-                    "<?= \yii\helpers\Url::to(['wechat/del-user-ajax']); ?>",
+                    "<?= yii\helpers\Url::to(['wechat/del-user-ajax']); ?>",
                     {
                         id:id,
                     },

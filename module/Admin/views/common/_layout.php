@@ -6,7 +6,10 @@ AppAsset::register($this);
 //AppAsset::addJs($this,Yii::$app->request->baseUrl."/js/a.js");
 //AppAsset::addCss($this,Yii::$app->request->baseUrl."/css/b.css");
 
-$this->registerCsrfMetaTags();
+$this->registerCsrfMetaTags(); //ajax安全策略
+
+
+
 $this->beginPage();
 ?>
 
