@@ -2,8 +2,10 @@
 
 namespace app\module\Admin\controllers;
 
+use app\models\Upload;
 use app\models\WxUser;
 use yii\data\Pagination;
+use yii\web\UploadedFile;
 
 class WechatController extends CommonController
 {
@@ -88,10 +90,14 @@ class WechatController extends CommonController
     public function actionEditpageAjax()
     {
         $post = \Yii::$app->request->post();
-        return json_encode($post);
+//        return json_encode($post);
 //        return json_encode($_FILES);
 
+        $upload = new Upload();
+        $info = $upload->getImage();
 
+        $imgUrl = \Yii::getAlias('@web').UPLOAD_DIR . $info['dirName'] . '/' . $info['fileName'];
+        return json_encode($imgUrl);
 
 //        return $this->ajaxReturn('SUCCESS','',$post);
     }

@@ -78,11 +78,11 @@ use yii\widgets\LinkPager;
                                 <div class="am-u-sm-9">
                                     <div class="am-form-group am-form-file">
                                         <div class="tpl-form-file-img">
-                                            <img src="assets/img/a5.png" alt="">
+                                            <img src="assets/img/a5.png" alt="" id="titleImg">
                                         </div>
                                         <button type="button" class="am-btn am-btn-danger am-btn-sm">
                                             <i class="am-icon-cloud-upload"></i> 添加封面图片</button>
-                                        <input id="doc-form-file" type="file" multiple="" name="file">
+                                        <input id="doc-form-file" type="file" name="image">
                                     </div>
 
                                 </div>
@@ -142,7 +142,7 @@ use yii\widgets\LinkPager;
         function submitForm(formId){
             //表单中没有图片的简易ajax
             /*$.post(
-                "<?php //yii\helpers\Url::to(['wechat/editpage-ajax']); ?>",
+                "wechat/editpage-ajax",
                 $('#'+formId).serialize(),
                 function(data){
                     console.log(data);
@@ -160,6 +160,7 @@ use yii\widgets\LinkPager;
                 dataType:"json",
                 success : function(data) {
                     console.log(data);
+                    $("#titleImg").attr('src',data)
                 }
             });
         }
