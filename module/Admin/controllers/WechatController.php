@@ -93,7 +93,7 @@ class WechatController extends CommonController
 //        return json_encode($post);
 //        return json_encode($_FILES);
 
-        $upload = new Upload();
+        $upload = new Upload('titleImg');
         $info = $upload->getImage();
 
         $imgUrl = \Yii::getAlias('@web').UPLOAD_DIR . $info['dirName'] . '/' . $info['fileName'];

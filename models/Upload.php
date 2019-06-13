@@ -17,16 +17,27 @@ class Upload extends Model
     public $uploadFileSize;//上传文件大小
     public $allowUploadedMaxsize = 100000000;//上传文件最大值
 
-    public function __construct()
+    /**
+     * Upload constructor.
+     * @param string $attributeName 上传文件域name
+     */
+    public function __construct($attributeName='image')
     {
         $this->uploadTargetDir = \Yii::getAlias('@webroot').UPLOAD_DIR; //最终文件夹
 
-        $this->uploadName = $_FILES['image']['name'];
-        $this->uploadFileType = $_FILES['image']['type'];
-        $this->uploadTmpName = $_FILES['image']['tmp_name'];
-        $this->uploadFileSize = $_FILES['image']['size'];
+        $this->uploadName = $_FILES[$attributeName]['name'];
+        $this->uploadFileType = $_FILES[$attributeName]['type'];
+        $this->uploadTmpName = $_FILES[$attributeName]['tmp_name'];
+        $this->uploadFileSize = $_FILES[$attributeName]['size'];
+
+        return $this;
     }
 
+    /**
+     * 上传图片
+     * @return array 图片信息
+     * @throws \Exception
+     */
     public function getImage()
     {
         if (!$this->isAllowFile($this->uploadFileType)){
@@ -43,13 +54,21 @@ class Upload extends Model
         if (!move_uploaded_file($this->uploadTmpName, $this->uploadTargetFile))
             throw new \Exception('文件类型上传失败', 10001);
 
-        return [
+        $image = [
             'path' => $this->uploadTargetFile,
             'dirName' => str_replace($this->uploadTargetDir, "", $dirName),
-            'fileName' => $newFileName
+            'fileName' => $newFileName,
         ];
+        $image['url'] = \Yii::getAlias('@web').UPLOAD_DIR . $info['dirName'] . '/' . $info['fileName'];
+
+        return $image;
     }
 
+    /**
+     * 判断文件类型是否合法
+     * @param $file_type
+     * @return bool
+     */
     protected function isAllowFile($file_type)
     {
         // $info = pathinfo($file_name);
@@ -58,11 +77,20 @@ class Upload extends Model
 
     }
 
+    /**
+     * 判断文件大小是否合法
+     * @param $size
+     * @return bool
+     */
     protected function isAllowSize($size)
     {
         return $size < $this->allowUploadedMaxsize ? true : false;
     }
 
+    /**
+     * 创建上传文件夹
+     * @return string 文件夹路径
+     */
     protected function createUploadDir()
     {
         clearstatcache();
