@@ -18,8 +18,10 @@ return [
         /**
          * 账号基本信息，请从微信公众平台/开放平台获取
          */
-        'app_id'  => 'wxa47b5b64afdb7376',         // AppID
-        'secret'  => '5dc7779abc03796890d35e41dbfa6902',     // AppSecret
+//        'app_id'  => 'wxa47b5b64afdb7376',         // 骂骂酱AppID
+        'app_id'  => 'wx69215fcf96bdf2a9',         // 测试号AppID
+//        'secret'  => '5dc7779abc03796890d35e41dbfa6902',     // 骂骂酱AppSecret
+        'secret'  => 'c5212f76c80ae466da345e9a2184773b',     // 测试号AppSecret
         'token'   => 'mamajiang',          // Token
         'aes_key' => 'Vkfz6VAU6YsGlku8LrodnGuUj8OGOqYdAsfy012sm9W', // EncodingAESKey，兼容与安全模式下请一定要填写！！！
 
