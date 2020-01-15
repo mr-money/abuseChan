@@ -21,22 +21,14 @@ class WechatController extends Controller
 
     public function actionTest()
     {
-        /*$openid = "oqpPK1WXbZ1rs5VkjLny3nC4GUs8";
-
-        $wechat = \Yii::$app->wechat->app;
-        $wxuser = $wechat->user->get($openid);
-
-        print_r($wxuser);*/
-
-        if(\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized())
-        {
+        if (\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized()) {
             return \Yii::$app->wechat->authorizeRequired()->send();
         }
 
-        $wxuser = \Yii::$app->wechat->user;
-        print_r($wxuser);
 
-
+        // 获取微信当前用户信息方法二
+        $user = \Yii::$app->wechat->user;
+        var_dump($user);
 
         return $this->render('test');
     }
