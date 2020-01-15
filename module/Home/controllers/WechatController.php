@@ -185,6 +185,11 @@ class WechatController extends Controller
                     "name" => "俄罗斯方块",
                     "url"  => \Yii::$app->urlManager->createAbsoluteUrl('Home/game/tetris')
                 ],
+            [
+                "type" => "test",
+                "name" => "测试链接",
+                "url"  => \Yii::$app->urlManager->createAbsoluteUrl('Home/wechat/test')
+            ],
         ];
 
         var_dump($buttons);
