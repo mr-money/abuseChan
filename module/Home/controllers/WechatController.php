@@ -30,7 +30,7 @@ class WechatController extends Controller
         $user = \Yii::$app->wechat->user;
         var_dump($user);
 
-        return $this->render('test');
+//        return $this->render('test');
     }
 
 
