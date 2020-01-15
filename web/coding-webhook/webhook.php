@@ -24,7 +24,7 @@ if (empty($headers['X-Hub-Signature']) || $headers['X-Hub-Signature'] !== $signa
 $json = json_decode($content, true);
 $repo = $json['commits'];
 
-$cmd = "cd $targer && sudo git pull";
+$cmd = "sudo -Hu abusechan cd $target && git pull";
 
 $res = shell_exec($cmd);
 print_r($res);
