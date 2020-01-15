@@ -2,6 +2,7 @@
 
 namespace app\module\Home\controllers;
 
+use app\models\AdminUser;
 use app\models\WxUser;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -86,7 +87,7 @@ class WechatController extends Controller
                 return '收到事件消息';
                 break;
             case 'text':
-//                return "what?";
+                return "what?";
                 break;
             case 'image':
                 return '收到图片消息';
@@ -139,8 +140,6 @@ class WechatController extends Controller
      */
     public function subscribeMange($message)
     {
-        return '明月直入，无心可猜';
-
 
         //下面是你点击关注时，进行的操作
         if(\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized())
@@ -165,32 +164,8 @@ class WechatController extends Controller
             'updateTime' => date('Y-m-d H:i:s',time()),
         );
 
-
-
-//        WxUser::add();
-        /*        $wxuser = new Wxuser;
-                        $user_info['openid'] = $message['FromUserName'];
-
-                        $result = $wxuser->where(array('openid'=>$user_info['openid']))->first();
-                        if(is_null($result)){
-                            $userService = $wechat->user;
-                            $user = $userService->get($user_info['openid']);
-                //            Log::info($user);
-                            $wxuser->openid =  $user_info['openid'];
-                            $wxuser->nickname =  $user['nickname'];
-                            $wxuser->avatar =  $user['headimgurl'];
-                            $wxuser->sex =  $user['sex'];
-                            $wxuser->is_subscribe =  1;
-                            $wxuser->subscribe_time =  $user['subscribe_time'];
-
-                            $wxuser->save();
-                            //数据发送到erp
-                            $this->sendErp($wxuser->toArray(),$user_info['openid']);
-
-                        }else{
-                            $result->is_subscribe =  1;
-                            $result->save();
-                        }*/
+        WxUser::save($userData);
+        return '明月直入，无心可猜';
     }
 
     /**
@@ -202,10 +177,10 @@ class WechatController extends Controller
      */
     public function unsubscribeManage($message, $wechat)
     {
-        /*        $wxuser = new Wxuser;
-                $result = $wxuser->where(array('openid' => $message['FromUserName']))->first();
-                $result->is_subscribe = 0;
-                $result->save();*/
+        $where['openid'] = $message['FromUserName'];
+        $wxUser = WxUser::find($where)->asArray()->one();
+        $wxUser->is_subscribe = 0;
+        $wxUser->save();
 
         return '取消关注';
     }
