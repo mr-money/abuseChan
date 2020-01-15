@@ -19,9 +19,10 @@ use Yii;
  * @property string $city 城市
  * @property string $province 省市
  * @property string $country 国家
- * @property int $is_subscribe
- * @property string $createTime
- * @property string $uptateTime
+ * @property string $backup 保留字段
+ * @property int $state 状态
+ * @property string $create_at 创建时间
+ * @property string $update_at 修改时间
  */
 class WxUser extends \yii\db\ActiveRecord
 {
@@ -40,10 +41,9 @@ class WxUser extends \yii\db\ActiveRecord
     {
         return [
             [['openid'], 'required'],
-            [['sex', 'subscribe_time', 'is_subscribe'], 'integer'],
-            [['createTime', 'uptateTime'], 'safe'],
-            [['openid', 'nickname', 'avatar', 'address', 'realname'], 'string', 'max' => 255],
-            [['tel', 'city', 'province', 'country'], 'string', 'max' => 32],
+            [['sex', 'subscribe_time', 'state'], 'integer'],
+            [['openid', 'nickname', 'avatar', 'address', 'realname', 'backup'], 'string', 'max' => 255],
+            [['tel', 'city', 'province', 'country', 'create_at', 'update_at'], 'string', 'max' => 32],
         ];
     }
 
@@ -65,9 +65,10 @@ class WxUser extends \yii\db\ActiveRecord
             'city' => 'City',
             'province' => 'Province',
             'country' => 'Country',
-            'is_subscribe' => 'Is Subscribe',
-            'createTime' => 'Create Time',
-            'uptateTime' => 'Uptate Time',
+            'backup' => 'Backup',
+            'state' => 'State',
+            'create_at' => 'Create At',
+            'update_at' => 'Update At',
         ];
     }
 }

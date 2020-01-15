@@ -154,17 +154,14 @@ class WechatController extends Controller
 
         \Yii::info($wxuser,'wxuser');
 
-
-        $userData = array(
-            'openid' => $wxuser->openId,
-            'nickname' => $wxuser->nickname,
-            'avatar' => $wxuser->avatar,
-            'is_subscribe' => 1,
-            'createTime' => date('Y-m-d H:i:s',time()),
-            'updateTime' => date('Y-m-d H:i:s',time()),
-        );
-
-        WxUser::save($userData);
+        $wxUser = new WxUser();
+        $wxUser->openid = $wxuser->openid;
+        $wxUser->nickname = $wxuser->nickname;
+        $wxUser->avatar = $wxuser->avatar;
+        $wxUser->subscribe_time = date('Y-m-d H:i:s',time());
+        $wxUser->create_at = date('Y-m-d H:i:s',time());
+        $wxUser->update_at = date('Y-m-d H:i:s',time());
+        WxUser::save();
         return '明月直入，无心可猜';
     }
 
@@ -178,9 +175,8 @@ class WechatController extends Controller
     public function unsubscribeManage($message, $wechat)
     {
         $where['openid'] = $message['FromUserName'];
-        $wxUser = WxUser::find($where)->asArray()->one();
-        $wxUser->is_subscribe = 0;
-        $wxUser->save();
+        $data['subscribe_time'] = '';
+        $res = WxUser::updateAll($data, $where);
 
         return '取消关注';
     }
@@ -201,7 +197,7 @@ class WechatController extends Controller
 
         var_dump($buttons);
         $res = $app->menu->create($buttons);
-
         var_dump($res);
     }
+
 }
