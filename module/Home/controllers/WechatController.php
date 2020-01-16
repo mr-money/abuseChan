@@ -37,7 +37,7 @@ class WechatController extends Controller
             var_dump(Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());
 //            return Yii::$app->wechat->authorizeRequired()->send();
             $response = Yii::$app->wechat->authorizeRequired();
-            $response->send();
+            $response->send();die;
         }
 
 
@@ -202,9 +202,14 @@ class WechatController extends Controller
                 "url" => Yii::$app->urlManager->createAbsoluteUrl('Home/game/tetris')
             ],
             [
-                "type" => "test",
-                "name" => "测试链接",
-                "url" => Yii::$app->urlManager->createAbsoluteUrl('Home/wechat/test')
+                "name"       => "菜单按钮",
+                "sub_button" => [
+                    [
+                        "type" => "view",
+                        "name" => "测试链接",
+                        "url"  => Yii::$app->urlManager->createAbsoluteUrl('Home/wechat/test')
+                    ],
+                ],
             ],
         ];
 
