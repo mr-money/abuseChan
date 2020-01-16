@@ -12,25 +12,27 @@ class WechatController extends Controller
     public $layout = false; //不使用默认布局
     public $enableCsrfValidation = false; //不验证csrf
 
-    private $wechatApp;
+    private $wechatYiiapp;
 
     public function init()
     {
         parent::init();
+        
+        $this->wechatYiiapp = \Yii::$app->wechat;
     }
 
     public function actionTest()
     {
-        if (\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized()) {
-            return \Yii::$app->wechat->authorizeRequired()->send();
+        if ($this->wechatYiiapp->isWechat && !$this->wechatYiiapp->isAuthorized()) {
+            return $this->wechatYiiapp->authorizeRequired()->send();
         }
 
 
         // 获取微信当前用户信息方法二
-        $user = \Yii::$app->wechat->user;
+        $user = $this->wechatYiiapp->user;
         var_dump($user);
 
-//        return $this->render('test');
+        return $this->render('test');
     }
 
 
@@ -39,10 +41,10 @@ class WechatController extends Controller
      */
     public function actionServer()
     {
-        $server = \Yii::$app->wechat->app->server;
+        $server = $this->wechatYiiapp->app->server;
 
         $server->push(function ($message) {
-            \Yii::info($message,'wechat'); //记log
+            \Yii::info($message, 'wechat'); //记log
 
             //消息事件处理
             return $this->messageMange($message);
@@ -134,25 +136,24 @@ class WechatController extends Controller
     {
 
         //下面是你点击关注时，进行的操作
-        if(\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized())
-        {
-            return \Yii::$app->wechat->authorizeRequired()->send();
+        if ($this->wechatYiiapp->isWechat && !$this->wechatYiiapp->isAuthorized()) {
+            return $this->wechatYiiapp->authorizeRequired()->send();
         }
 
         $openid = $message['FromUserName'];
 
-        $wechat = \Yii::$app->wechat->app;
+        $wechat = $this->wechatYiiapp->app;
         $wxuser = $wechat->user->get($openid);
 
-        \Yii::info($wxuser,'wxuser');
+        \Yii::info($wxuser, 'wxuser');
 
         $wxUser = new WxUser();
         $wxUser->openid = $wxuser->openid;
         $wxUser->nickname = $wxuser->nickname;
         $wxUser->avatar = $wxuser->avatar;
-        $wxUser->subscribe_time = date('Y-m-d H:i:s',time());
-        $wxUser->create_at = date('Y-m-d H:i:s',time());
-        $wxUser->update_at = date('Y-m-d H:i:s',time());
+        $wxUser->subscribe_time = date('Y-m-d H:i:s', time());
+        $wxUser->create_at = date('Y-m-d H:i:s', time());
+        $wxUser->update_at = date('Y-m-d H:i:s', time());
         WxUser::save();
         return '明月直入，无心可猜';
     }
@@ -177,18 +178,19 @@ class WechatController extends Controller
     /**
      * 添加菜单
      */
-    public  function  actionAddmenu(){
-        $app = \Yii::$app->wechat->app;
+    public function actionAddmenu()
+    {
+        $app = $this->wechatYiiapp->app;
         $buttons = [
-                [
-                    "type" => "view",
-                    "name" => "俄罗斯方块",
-                    "url"  => \Yii::$app->urlManager->createAbsoluteUrl('Home/game/tetris')
-                ],
+            [
+                "type" => "view",
+                "name" => "俄罗斯方块",
+                "url" => \Yii::$app->urlManager->createAbsoluteUrl('Home/game/tetris')
+            ],
             [
                 "type" => "test",
                 "name" => "测试链接",
-                "url"  => \Yii::$app->urlManager->createAbsoluteUrl('Home/wechat/test')
+                "url" => \Yii::$app->urlManager->createAbsoluteUrl('Home/wechat/test')
             ],
         ];
 
