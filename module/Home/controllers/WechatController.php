@@ -23,9 +23,9 @@ class WechatController extends Controller
 
     public function actionTest()
     {
-        if ($this->wechatYiiapp->isWechat && !$this->wechatYiiapp->isAuthorized()) {
-            return $this->wechatYiiapp->authorizeRequired()->send();
-        }
+//        if ($this->wechatYiiapp->isWechat && !$this->wechatYiiapp->isAuthorized()) {
+//            return $this->wechatYiiapp->authorizeRequired()->send();
+//        }
 
         $response = $this->wechatYiiapp->oauth->scopes(['snsapi_userinfo'])->redirect();
         $response->send();
