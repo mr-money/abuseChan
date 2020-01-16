@@ -4,6 +4,8 @@ namespace app\module\Home\controllers;
 
 use app\models\AdminUser;
 use app\models\WxUser;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
 
@@ -22,23 +24,24 @@ class WechatController extends Controller
     /**
      * 测试页面
      * @return string|void
-     * @throws \yii\base\InvalidConfigException
+     * @throws Yii\base\InvalidConfigException
      */
     public function actionTest()
     {
-        $url = \Yii::$app->urlManager->createAbsoluteUrl('Home/wechat/test');
-        var_dump(\Yii::$app->wechat->app->oauth->redirect($url));
-        var_dump(\Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());die;
+        $url = Yii::$app->urlManager->createAbsoluteUrl('Home/wechat/test');
+        var_dump(Yii::$app->request->get('code'));die;
+//        var_dump(Yii::$app->wechat->app->oauth->redirect($url));die;
+        var_dump(Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());die;
 
-        if (\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized()) {
-            \Yii::$app->wechat->app->oauth->redirect()->setTargetUrl('wechat/test');
-            var_dump(\Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());die;
-            return \Yii::$app->wechat->authorizeRequired()->send();
+        if (Yii::$app->wechat->isWechat && !Yii::$app->wechat->isAuthorized()) {
+//            var_dump(Yii::$app->wechat->app->oauth->redirect($url));
+            var_dump(Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());die;
+            return Yii::$app->wechat->authorizeRequired()->send();
         }
 
 
         // 获取微信当前用户信息方法
-        $user = \Yii::$app->wechat->user;
+        $user = Yii::$app->wechat->user;
         var_dump($user);
 
         return $this->render('test');
@@ -50,10 +53,10 @@ class WechatController extends Controller
      */
     public function actionServer()
     {
-        $server = \Yii::$app->wechat->app->server;
+        $server = Yii::$app->wechat->app->server;
 
         $server->push(function ($message) {
-            \Yii::info($message, 'wechat'); //记log
+            Yii::info($message, 'wechat'); //记log
 
             //消息事件处理
             return $this->messageMange($message);
@@ -145,16 +148,16 @@ class WechatController extends Controller
     {
 
         //下面是你点击关注时，进行的操作
-//        if (\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized()) {
-//            return \Yii::$app->wechat->authorizeRequired()->send();
+//        if (Yii::$app->wechat->isWechat && !Yii::$app->wechat->isAuthorized()) {
+//            return Yii::$app->wechat->authorizeRequired()->send();
 //        }
 
         $openid = $message['FromUserName'];
 
-        $wechat = \Yii::$app->wechat->app;
+        $wechat = Yii::$app->wechat->app;
         $wxuser = $wechat->user->get($openid);
 
-        \Yii::info($wxuser, 'wxuser');
+        Yii::info($wxuser, 'wxuser');
 
         $wxUser = new WxUser();
         $wxUser->openid = $wxuser->openid;
@@ -189,17 +192,17 @@ class WechatController extends Controller
      */
     public function actionAddmenu()
     {
-        $app = \Yii::$app->wechat->app;
+        $app = Yii::$app->wechat->app;
         $buttons = [
             [
                 "type" => "view",
                 "name" => "俄罗斯方块",
-                "url" => \Yii::$app->urlManager->createAbsoluteUrl('Home/game/tetris')
+                "url" => Yii::$app->urlManager->createAbsoluteUrl('Home/game/tetris')
             ],
             [
                 "type" => "test",
                 "name" => "测试链接",
-                "url" => \Yii::$app->urlManager->createAbsoluteUrl('Home/wechat/test')
+                "url" => Yii::$app->urlManager->createAbsoluteUrl('Home/wechat/test')
             ],
         ];
 
