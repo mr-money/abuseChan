@@ -32,12 +32,13 @@ class WechatController extends Controller
 //        var_dump(Yii::$app->wechat->app->oauth->redirect($url));die;
 //        var_dump(Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());die;
 
+        var_dump(Yii::$app->request->get('code'));die;
         if (Yii::$app->wechat->isWechat && !Yii::$app->wechat->isAuthorized()) {
 //            var_dump(Yii::$app->wechat->app->oauth->redirect($url));
             var_dump(Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());
-//            return Yii::$app->wechat->authorizeRequired()->send();
-            $response = Yii::$app->wechat->authorizeRequired();
-            $response->send();die;
+            return Yii::$app->wechat->authorizeRequired()->send();die;
+//            $response = Yii::$app->wechat->authorizeRequired();
+//            $response->send();die;
         }
 
 
