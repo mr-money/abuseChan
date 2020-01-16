@@ -26,6 +26,10 @@ class WechatController extends Controller
      */
     public function actionTest()
     {
+        $url = \Yii::$app->urlManager->createAbsoluteUrl('Home/wechat/test');
+        var_dump(\Yii::$app->wechat->app->oauth->redirect($url));
+        var_dump(\Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());die;
+
         if (\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized()) {
             \Yii::$app->wechat->app->oauth->redirect()->setTargetUrl('wechat/test');
             var_dump(\Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());die;
@@ -141,9 +145,9 @@ class WechatController extends Controller
     {
 
         //下面是你点击关注时，进行的操作
-        if (\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized()) {
-            return \Yii::$app->wechat->authorizeRequired()->send();
-        }
+//        if (\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized()) {
+//            return \Yii::$app->wechat->authorizeRequired()->send();
+//        }
 
         $openid = $message['FromUserName'];
 
