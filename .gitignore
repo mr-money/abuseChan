@@ -39,3 +39,4 @@ tests/_support/_generated
 /adminHTML
 admin.rar
 coding-webhook
+/composer.lock
