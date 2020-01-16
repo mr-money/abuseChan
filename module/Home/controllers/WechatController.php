@@ -27,8 +27,8 @@ class WechatController extends Controller
     public function actionTest()
     {
         if (\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized()) {
-            \Yii::$app->wechat->app->oauth->setRedirectUrl('wechat/test');
-            var_dump(\Yii::$app->wechat->app->oauth->getRedirectUrl());
+            \Yii::$app->wechat->app->oauth->redirect()->setTargetUrl('wechat/test');
+            var_dump(\Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());die;
             return \Yii::$app->wechat->authorizeRequired()->send();
         }
 
