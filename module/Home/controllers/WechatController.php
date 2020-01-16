@@ -21,15 +21,15 @@ class WechatController extends Controller
 
     public function actionTest()
     {
-        if ($this->wechatYiiapp->isWechat && !$this->wechatYiiapp->isAuthorized()) {
-            return $this->wechatYiiapp->authorizeRequired()->send();
+        if (!$this->wechatYiiapp->isAuthorized()) {
+            return $this->wechatYiiapp->authorizeRequired()->send();exit();
         }
 
         // 获取微信当前用户信息
         $user = $this->wechatYiiapp->user;
         var_dump($user);
 
-        return $this->render('test');exit();
+        return $this->render('test');
     }
 
 
