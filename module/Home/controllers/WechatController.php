@@ -29,19 +29,21 @@ class WechatController extends Controller
     public function actionTest()
     {
         $url = Yii::$app->urlManager->createAbsoluteUrl('Home/wechat/test');
-        var_dump(Yii::$app->request->get('code'));die;
 //        var_dump(Yii::$app->wechat->app->oauth->redirect($url));die;
-        var_dump(Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());die;
+//        var_dump(Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());die;
 
         if (Yii::$app->wechat->isWechat && !Yii::$app->wechat->isAuthorized()) {
 //            var_dump(Yii::$app->wechat->app->oauth->redirect($url));
-            var_dump(Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());die;
-            return Yii::$app->wechat->authorizeRequired()->send();
+            var_dump(Yii::$app->wechat->app->oauth->redirect()->getTargetUrl());
+//            return Yii::$app->wechat->authorizeRequired()->send();
+            $response = Yii::$app->wechat->authorizeRequired();
+            $response->send();
         }
 
 
         // 获取微信当前用户信息方法
-        $user = Yii::$app->wechat->user;
+//        $user = Yii::$app->wechat->user;;
+        $user = Yii::$app->session->get('wechatUser');
         var_dump($user);
 
         return $this->render('test');
