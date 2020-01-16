@@ -2,7 +2,9 @@
 
 namespace app\module\Home\controllers;
 
+use app\models\AdminUser;
 use app\models\WxUser;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 class WechatController extends Controller
@@ -10,23 +12,29 @@ class WechatController extends Controller
     public $layout = false; //不使用默认布局
     public $enableCsrfValidation = false; //不验证csrf
 
-    private $wechatYiiapp;
 
     public function init()
     {
         parent::init();
         
-        $this->wechatYiiapp = \Yii::$app->wechat;
     }
 
+    /**
+     * 测试页面
+     * @return string|void
+     * @throws \yii\base\InvalidConfigException
+     */
     public function actionTest()
     {
-        if (!$this->wechatYiiapp->isAuthorized()) {
-            return $this->wechatYiiapp->authorizeRequired()->send();exit();
+        if (\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized()) {
+            \Yii::$app->wechat->app->oauth->setRedirectUrl('wechat/test');
+            var_dump(\Yii::$app->wechat->app->oauth->getRedirectUrl());
+            return \Yii::$app->wechat->authorizeRequired()->send();
         }
 
-        // 获取微信当前用户信息
-        $user = $this->wechatYiiapp->user;
+
+        // 获取微信当前用户信息方法
+        $user = \Yii::$app->wechat->user;
         var_dump($user);
 
         return $this->render('test');
@@ -38,7 +46,7 @@ class WechatController extends Controller
      */
     public function actionServer()
     {
-        $server = $this->wechatYiiapp->app->server;
+        $server = \Yii::$app->wechat->app->server;
 
         $server->push(function ($message) {
             \Yii::info($message, 'wechat'); //记log
@@ -133,13 +141,13 @@ class WechatController extends Controller
     {
 
         //下面是你点击关注时，进行的操作
-        if ($this->wechatYiiapp->isWechat && !$this->wechatYiiapp->isAuthorized()) {
-            return $this->wechatYiiapp->authorizeRequired()->send();
+        if (\Yii::$app->wechat->isWechat && !\Yii::$app->wechat->isAuthorized()) {
+            return \Yii::$app->wechat->authorizeRequired()->send();
         }
 
         $openid = $message['FromUserName'];
 
-        $wechat = $this->wechatYiiapp->app;
+        $wechat = \Yii::$app->wechat->app;
         $wxuser = $wechat->user->get($openid);
 
         \Yii::info($wxuser, 'wxuser');
@@ -177,7 +185,7 @@ class WechatController extends Controller
      */
     public function actionAddmenu()
     {
-        $app = $this->wechatYiiapp->app;
+        $app = \Yii::$app->wechat->app;
         $buttons = [
             [
                 "type" => "view",
