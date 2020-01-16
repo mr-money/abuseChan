@@ -27,9 +27,11 @@ class WechatController extends Controller
             return $this->wechatYiiapp->authorizeRequired()->send();
         }
 
+        $response = $this->wechatYiiapp->oauth->scopes(['snsapi_userinfo'])->redirect();
+        $response->send();
 
-        // 获取微信当前用户信息方法二
-        $user = $this->wechatYiiapp->user;
+        // 获取微信当前用户信息
+        $user = $this->wechatYiiapp->oauth->user;
         var_dump($user);
 
         return $this->render('test');
