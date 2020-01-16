@@ -2,9 +2,7 @@
 
 namespace app\module\Home\controllers;
 
-use app\models\AdminUser;
 use app\models\WxUser;
-use yii\helpers\Url;
 use yii\web\Controller;
 
 class WechatController extends Controller
@@ -28,7 +26,7 @@ class WechatController extends Controller
         }
 
         // 获取微信当前用户信息
-        $user = $this->wechatYiiapp->oauth->user;
+        $user = $this->wechatYiiapp->user;
         var_dump($user);
 
         return $this->render('test');exit();
